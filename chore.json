@@ -1,0 +1,25 @@
+{
+  "id": "hppRC",
+  "name": "Hayato Tsukagoshi",
+  "affiliation": "Nagoya University",
+  "registerDate": 1561014525529,
+  "lastSubmitDate": 1572260090661,
+  "policy": "public",
+  "country": "jp",
+  "birthYear": 1998,
+  "displayLanguage": "Japanese",
+  "defaultProgrammingLanguage": "Python3",
+  "avatar": null,
+  "status": {
+    "submissions": 65,
+    "solved": 19,
+    "accepted": 20,
+    "wrongAnswer": 20,
+    "timeLimit": 6,
+    "memoryLimit": 0,
+    "outputLimit": 0,
+    "compileError": 0,
+    "runtimeError": 19
+  },
+  "url": "https://github.com/hppRC"
+}

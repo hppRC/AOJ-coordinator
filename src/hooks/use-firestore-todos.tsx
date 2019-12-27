@@ -40,11 +40,14 @@ export const useFirestoreTodos = (uid: string) => {
       `desc`
     );
 
-    const unsubscribe = query.onSnapshot(snapshot => {
-      const todos = snapshot.docs.map(doc => toModel(doc.id, doc.data()));
-      console.log(todos);
-      setTodos(todos);
-    });
+    const unsubscribe = query.onSnapshot(
+      { includeMetadataChanges: false },
+      snapshot => {
+        const todos = snapshot.docs.map(doc => toModel(doc.id, doc.data()));
+        console.log(todos);
+        setTodos(todos);
+      }
+    );
 
     return () => {
       unsubscribe();
