@@ -1,10 +1,10 @@
 const config = {
-  siteTitle: `Gatsby Starter hpp`,
-  siteTitleAlt: `Gatsby Starter hpp - @hppRC/gatsby-starter-hpp`,
-  siteHeadline: `Gatsby Starter hpp - Gatsby Starter from @hppRC`,
-  siteUrl: `https://gatsby-starter-hpp.netlify.com`,
-  siteDescription: `simple gatsby starter with mdx, typescript, pwa`,
-  siteLanguage: `en`,
+  siteTitle: `AOJ cordinator`,
+  siteTitleAlt: `AOJ cordinator - simple AOJ arena conrdinator -`,
+  siteHeadline: `AOJ cordinator - simple AOJ arena conrdinator -`,
+  siteUrl: `https://aoj-cordinator.firebaseapp.com`,
+  siteDescription: `AOJ cordinator - simple AOJ arena conrdinator -\nYou can easily create virtual contest and manage your solved problems`,
+  siteLanguage: `ja`,
   author: `@osaremochi`, // twitter account id
   basePath: `/`
 };
