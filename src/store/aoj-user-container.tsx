@@ -6,11 +6,13 @@ const useAOJUserContainer = () => {
   const [aoj_user, setAOJUser] = useState<AOJUser | null>();
 
   const setAOJUserId = (aojUserId: string) => {
-    setAOJUser({ ...(aoj_user as AOJUser), id: aojUserId });
-    console.log(aoj_user);
+    if (aojUserId !== aoj_user?.id) {
+      setAOJUser({ ...(aoj_user as AOJUser), id: aojUserId });
+    }
+    return;
   };
 
-  return { aoj_user, setAOJUserId };
+  return { aoj_user, setAOJUser, setAOJUserId };
 };
 
 export const AOJUserContainer = createContainer(useAOJUserContainer);
