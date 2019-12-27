@@ -2,8 +2,8 @@
   "author": "hppRC <hpp.ricecake@gmail.com>",
   "license": "MIT",
   "main": "index.js",
-  "name": "gatsby-firebase-skeleton",
-  "repository": "git@github.com:hppRC/gatsby-firebase-skeleton.git",
+  "name": "aoj-cordinator",
+  "repository": "git@github.com:hppRC/aoj-cordinator.git",
   "version": "1.0.0",
   "dependencies": {
     "@babel/core": "^7.7.4",

@@ -6,13 +6,13 @@ export const wrapPageElement = WrapPageElement;
 
 export const onClientEntry = () => {
   firebase.initializeApp({
-    apiKey: 'AIzaSyC7YBeBvin3Gw9KQ7iXo5KJhkmJzLj9Pm4',
-    authDomain: 'gatsby-firebase-skeleton.firebaseapp.com',
-    databaseURL: 'https://gatsby-firebase-skeleton.firebaseio.com',
-    projectId: 'gatsby-firebase-skeleton',
-    storageBucket: 'gatsby-firebase-skeleton.appspot.com',
-    messagingSenderId: '969602248460',
-    appId: '1:969602248460:web:3691b4c8bef7f5c7ad2329',
-    measurementId: 'G-665ESWY34D'
+    apiKey: 'AIzaSyCFh7xKWn89QPeFFHvqgh5-NG5Ze5doawY',
+    authDomain: 'aoj-cordinator.firebaseapp.com',
+    databaseURL: 'https://aoj-cordinator.firebaseio.com',
+    projectId: 'aoj-cordinator',
+    storageBucket: 'aoj-cordinator.appspot.com',
+    messagingSenderId: '875646715312',
+    appId: '1:875646715312:web:4159d8c6f356e5711b4275',
+    measurementId: 'G-LZ27KQZD9K'
   });
 };
