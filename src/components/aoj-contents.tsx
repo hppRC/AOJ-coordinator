@@ -11,7 +11,6 @@ const AOJContents: React.FCX = ({ className }) => {
     aojUser,
     setAOJUserOnFirestore,
     client,
-
     solvedProblemIds
   } = AOJContainer.useContainer();
 
@@ -22,7 +21,7 @@ const AOJContents: React.FCX = ({ className }) => {
     if (!user || !userNameRef.current?.value.trim()) return;
 
     //名前が保存されてるものと違う場合のみsetする,同じなら早期return
-    //if (aojUser?.id === userNameRef.current.value) return;
+    if (aojUser?.id === userNameRef.current.value) return;
 
     try {
       const url = `https://judgeapi.u-aizu.ac.jp/users/${userNameRef.current.value}`;

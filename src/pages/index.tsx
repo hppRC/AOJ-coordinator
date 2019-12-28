@@ -3,7 +3,6 @@ import {
     SEO, StyledAOJContents, StyledGoogleAuthButton as GoogleAuthButton,
     StyledSignOutButton as SignOutButton
 } from 'src/components';
-import { StyledTodoContents as TodoContents } from 'src/internal/index/todo-contents';
 import { FirebaseAuthContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
@@ -18,7 +17,6 @@ const Index: React.FCX = ({ className }) => {
       {user ? (
         <>
           <StyledAOJContents />
-          <TodoContents />
           <SignOutButton />
         </>
       ) : (

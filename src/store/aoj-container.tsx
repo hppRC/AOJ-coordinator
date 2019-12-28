@@ -17,7 +17,8 @@ const useAOJContainer = () => {
   //custom hook内でuseStateから取れた変数を使ってもリアクティブになっていないので注意
   const { user } = FirebaseAuthContainer.useContainer();
   const [aojUser, setAOJUser] = useState<AOJUser | null>();
-  //useState内でSetを扱うのはおぬジェクトの参照の関係でめんどくさい、配列でラップするといい(https://dev.to/ganes1410/using-javascript-sets-with-react-usestate-39eo)
+  //useState内でSetを扱うのはおぬジェクトの参照の関係でめんどくさい、配列でラップするといい
+  //https://dev.to/ganes1410/using-javascript-sets-with-react-usestate-39eo
   const [[solvedProblemIds], setProblemIds] = useState<Set<string>[]>([
     new Set()
   ]);

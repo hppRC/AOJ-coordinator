@@ -49,18 +49,18 @@ export type AOJUserStatus = {
 };
 
 export type Problem = {
-  judgeId: number;
-  userId: string;
-  problemId: string;
-  language: string;
-  version: string;
-  submissionDate: number;
-  judgeDate: number;
-  cpuTime: number;
-  memory: number;
-  codeSize: number;
-  server: number;
-  policy: string;
-  rating: number;
-  review: number;
+  readonly judgeId: number;
+  readonly userId: string;
+  readonly problemId: string;
+  readonly language: string;
+  readonly version: string;
+  readonly submissionDate: number;
+  readonly judgeDate: number;
+  readonly cpuTime: number;
+  readonly memory: number;
+  readonly codeSize: number;
+  readonly server: number;
+  readonly policy: string;
+  readonly rating: number;
+  readonly review: number;
 };
