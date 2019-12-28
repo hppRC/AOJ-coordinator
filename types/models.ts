@@ -13,30 +13,37 @@ export type User = {
   readonly name: string;
 };
 
-export type AOJUser = Partial<{
-  id: string;
-  name: string;
-  affiliation: string;
-  registerDate: number;
-  lastSubmitDate: number;
-  policy: string;
-  country: string;
-  birthYear: number;
-  displayLanguage: string;
-  defaultProgrammingLanguage: string;
-  avatar: null;
-  status: AOJUserStatus;
-  url: string;
-}>;
+export type AOJUserDataOnFirestore = {
+  readonly data: AOJUser;
+  readonly createdAt?: firestore.Timestamp;
+  readonly updatedAt?: firestore.Timestamp;
+};
 
-export type AOJUserStatus = Partial<{
-  submissions: number;
-  solved: number;
-  accepted: number;
-  wrongAnswer: number;
-  timeLimit: number;
-  memoryLimit: number;
-  outputLimit: number;
-  compileError: number;
-  runtimeError: number;
-}>;
+export type AOJUser = {
+  [key: string]: string | number | null | AOJUserStatus;
+  readonly id: string;
+  readonly name: string;
+  readonly affiliation: string;
+  readonly registerDate: number;
+  readonly lastSubmitDate: number;
+  readonly policy: string;
+  readonly country: string;
+  readonly birthYear: number;
+  readonly displayLanguage: string;
+  readonly defaultProgrammingLanguage: string;
+  readonly avatar: null;
+  readonly status: AOJUserStatus;
+  readonly url: string;
+};
+
+export type AOJUserStatus = {
+  readonly submissions: number;
+  readonly solved: number;
+  readonly accepted: number;
+  readonly wrongAnswer: number;
+  readonly timeLimit: number;
+  readonly memoryLimit: number;
+  readonly outputLimit: number;
+  readonly compileError: number;
+  readonly runtimeError: number;
+};
