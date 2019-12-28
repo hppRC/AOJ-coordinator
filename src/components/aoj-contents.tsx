@@ -7,14 +7,19 @@ import styled from '@emotion/styled';
 
 const AOJContents: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
-  const { setAOJUserOnFirestore } = AOJUserContainer.useContainer();
+  const { aojUser, setAOJUserOnFirestore } = AOJUserContainer.useContainer();
 
   const ref = useRef<HTMLInputElement>(null);
 
   const onSubmit = async (e: React.SyntheticEvent<{}>) => {
     e.preventDefault();
-    if (!user) return;
-    if (!ref.current) return;
+    if (!user || !ref.current?.value.trim()) return;
+
+    if (aojUser?.id === ref.current.value) {
+      console.log('same as current name');
+      ref.current.value = '';
+      return;
+    }
 
     try {
       const url = `https://judgeapi.u-aizu.ac.jp/users/${ref.current.value}`;
@@ -27,12 +32,18 @@ const AOJContents: React.FCX = ({ className }) => {
     ref.current.value = '';
   };
 
+  const handleLogin = () => {
+    console.log(aojUser);
+    console.log('AOJ login');
+  };
+
   return (
     <div className={className}>
       <form onSubmit={onSubmit}>
         <input type='text' ref={ref} />
         <button type='submit'>get aoj user data</button>
       </form>
+      <button onClick={handleLogin}>AOJ log in</button>
     </div>
   );
 };

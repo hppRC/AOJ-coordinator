@@ -1,15 +1,29 @@
 import firebase from 'firebase/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AOJUser } from 'types/models';
 import { createContainer } from 'unstated-next';
 
 const useAOJUserContainer = () => {
   const [aojUser, setAOJUser] = useState<AOJUser | null>();
 
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      console.log('aoj use effect');
+      if (user) {
+        console.log(user);
+        //firestoreからAOJ関連のデータを引っ張ってくる
+      } else {
+        console.log('not login');
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const setAOJUserOnFirestore = async (uid: string, userData: AOJUser) => {
     if (!userData) return;
-
-    console.log('setAOJUserOnFirebase\n', userData);
 
     const docRef = await firebase
       .firestore()
@@ -19,6 +33,7 @@ const useAOJUserContainer = () => {
       .doc('userData');
 
     const doc = await docRef.get();
+
     if (doc.exists) {
       docRef
         .update({
