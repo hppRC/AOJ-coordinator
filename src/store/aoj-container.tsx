@@ -99,6 +99,7 @@ const useAOJContainer = () => {
       //解いた問題を詰め直す用
       const newSolvedProblemIds = new Set<string>();
 
+      //AOJのAPIから指定ユーザの解答情報を全部取ってくる
       const url = `https://judgeapi.u-aizu.ac.jp/solutions/users/${aojUserId}?size=5000`;
       const res: AxiosResponse<Problem[]> = await client.get(url);
 
