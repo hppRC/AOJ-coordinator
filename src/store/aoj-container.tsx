@@ -61,7 +61,10 @@ const useAOJContainer = () => {
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         .catch(error => {
-          console.error('Error add todo to Firebase Database', error);
+          console.error(
+            'document exists but error occured on Update useData',
+            error
+          );
         });
     } else {
       docRef
@@ -71,7 +74,10 @@ const useAOJContainer = () => {
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         .catch(error => {
-          console.error('Error add todo to Firebase Database', error);
+          console.error(
+            "document dosen't exists but error occured on Update useData",
+            error
+          );
         });
     }
 

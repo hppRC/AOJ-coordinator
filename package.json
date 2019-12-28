@@ -55,7 +55,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "gatsby build && firebase deploy --only hosting",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx,tsx}",
     "serve": "gatsby serve",
