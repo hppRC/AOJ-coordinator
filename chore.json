@@ -1,25 +1,16 @@
 {
-  "id": "hppRC",
-  "name": "Hayato Tsukagoshi",
-  "affiliation": "Nagoya University",
-  "registerDate": 1561014525529,
-  "lastSubmitDate": 1572260090661,
+  "judgeId": 3956539,
+  "userId": "hppRC",
+  "problemId": "2905",
+  "language": "Python3",
+  "version": "3.6.3",
+  "submissionDate": 1572260090661,
+  "judgeDate": 1572260104682,
+  "cpuTime": 51,
+  "memory": 44676,
+  "codeSize": 1878,
+  "server": 9,
   "policy": "public",
-  "country": "jp",
-  "birthYear": 1998,
-  "displayLanguage": "Japanese",
-  "defaultProgrammingLanguage": "Python3",
-  "avatar": null,
-  "status": {
-    "submissions": 65,
-    "solved": 19,
-    "accepted": 20,
-    "wrongAnswer": 20,
-    "timeLimit": 6,
-    "memoryLimit": 0,
-    "outputLimit": 0,
-    "compileError": 0,
-    "runtimeError": 19
-  },
-  "url": "https://github.com/hppRC"
+  "rating": -1,
+  "review": -1
 }

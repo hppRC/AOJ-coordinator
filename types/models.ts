@@ -47,3 +47,20 @@ export type AOJUserStatus = {
   readonly compileError: number;
   readonly runtimeError: number;
 };
+
+export type Problem = {
+  judgeId: number;
+  userId: string;
+  problemId: string;
+  language: string;
+  version: string;
+  submissionDate: number;
+  judgeDate: number;
+  cpuTime: number;
+  memory: number;
+  codeSize: number;
+  server: number;
+  policy: string;
+  rating: number;
+  review: number;
+};

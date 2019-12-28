@@ -10,58 +10,44 @@ const AOJContents: React.FCX = ({ className }) => {
   const {
     aojUser,
     setAOJUserOnFirestore,
-    client
+    client,
+
+    solvedProblemIds
   } = AOJContainer.useContainer();
 
   const userNameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = async (e: React.SyntheticEvent<{}>) => {
     e.preventDefault();
-    if (
-      !user ||
-      !userNameRef.current?.value.trim() ||
-      !passwordRef.current?.value.trim()
-    )
-      return;
+    if (!user || !userNameRef.current?.value.trim()) return;
 
     //名前が保存されてるものと違う場合のみsetする,同じなら早期return
     //if (aojUser?.id === userNameRef.current.value) return;
 
     try {
-      const url = `https://judgeapi.u-aizu.ac.jp/session`;
-      const res: AxiosResponse<AOJUser> = await client.post(url, {
-        id: userNameRef.current.value,
-        password: passwordRef.current.value
-      });
-      console.log(res);
+      const url = `https://judgeapi.u-aizu.ac.jp/users/${userNameRef.current.value}`;
+      const res: AxiosResponse<AOJUser> = await client.get(url);
+      console.log(res.data);
       setAOJUserOnFirestore(res.data);
     } catch (error) {
       console.error(error);
     }
 
     userNameRef.current.value = '';
-    passwordRef.current.value = '';
   };
 
-  const handleSession = async () => {
-    try {
-      const url = `https://judgeapi.u-aizu.ac.jp/self`;
-      const res: AxiosResponse<AOJUser> = await client.get(url);
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      const url = `https://judgeapi.u-aizu.ac.jp/session`;
-      const res: AxiosResponse<AOJUser> = await client.delete(url);
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleProblems = async () => {
+    // const test = (
+    //   await firebase
+    //     .firestore()
+    //     .collection(`users`)
+    //     .doc(user?.uid)
+    //     .collection(`solved_problems`)
+    //     .get()
+    // ).docs.map(doc => doc.data());
+    // console.log(test);
+    //
+    console.log(solvedProblemIds);
   };
 
   return (
@@ -70,13 +56,9 @@ const AOJContents: React.FCX = ({ className }) => {
       <form onSubmit={onSubmit}>
         <label htmlFor='userName'>user name</label>
         <input type='text' id='userName' ref={userNameRef} />
-        <label htmlFor='password'>password</label>
-        <input type='password' id='password' ref={passwordRef} />
-        <br />
         <button type='submit'>get aoj user data</button>
       </form>
-      <button onClick={handleSession}>session</button>
-      <button onClick={handleLogout}>logout</button>
+      <button onClick={handleProblems}>problems</button>
     </div>
   );
 };
