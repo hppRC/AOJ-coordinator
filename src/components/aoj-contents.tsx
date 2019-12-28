@@ -1,18 +1,17 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import React, { useRef } from 'react';
-import { AOJUserContainer, FirebaseAuthContainer } from 'src/store';
+import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 import { AOJUser } from 'types/models';
 
 import styled from '@emotion/styled';
 
 const AOJContents: React.FCX = ({ className }) => {
-  const client = axios.create({
-    xsrfHeaderName: 'X-CSRF-Token',
-
-    withCredentials: true
-  });
   const { user } = FirebaseAuthContainer.useContainer();
-  const { aojUser, setAOJUserOnFirestore } = AOJUserContainer.useContainer();
+  const {
+    aojUser,
+    setAOJUserOnFirestore,
+    client
+  } = AOJContainer.useContainer();
 
   const userNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -36,13 +35,12 @@ const AOJContents: React.FCX = ({ className }) => {
         password: passwordRef.current.value
       });
       console.log(res);
-      setAOJUserOnFirestore(user.uid, res.data);
+      setAOJUserOnFirestore(res.data);
     } catch (error) {
       console.error(error);
     }
 
     userNameRef.current.value = '';
-
     passwordRef.current.value = '';
   };
 
@@ -66,16 +64,6 @@ const AOJContents: React.FCX = ({ className }) => {
     }
   };
 
-  const handleArena = async () => {
-    try {
-      const url = `https://judgeapi.u-aizu.ac.jp/arenas`;
-      const res: AxiosResponse<AOJUser> = await client.post(url);
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div className={className}>
       <h1>{aojUser?.id}</h1>
@@ -89,7 +77,6 @@ const AOJContents: React.FCX = ({ className }) => {
       </form>
       <button onClick={handleSession}>session</button>
       <button onClick={handleLogout}>logout</button>
-      <button onClick={handleArena}>arena</button>
     </div>
   );
 };
