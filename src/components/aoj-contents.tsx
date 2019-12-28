@@ -42,6 +42,7 @@ const AOJContents: React.FCX = ({ className }) => {
     }
 
     userNameRef.current.value = '';
+
     passwordRef.current.value = '';
   };
 
