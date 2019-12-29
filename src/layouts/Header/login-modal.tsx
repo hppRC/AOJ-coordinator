@@ -1,4 +1,5 @@
-import React from 'react';
+import firebase from 'firebase/app';
+import React, { useEffect } from 'react';
 import { animated, config, useSpring } from 'react-spring';
 import { StyledGoogleAuthButton } from 'src/components/auth-buttons';
 import { FirebaseAuthContainer, SwitchContainer } from 'src/store';
@@ -6,8 +7,19 @@ import { FirebaseAuthContainer, SwitchContainer } from 'src/store';
 import styled from '@emotion/styled';
 
 const LoginModal: React.FCX = ({ className }) => {
-  const { open, toggle } = SwitchContainer.useContainer();
+  const { open, toggle, setOpen } = SwitchContainer.useContainer();
   const { user } = FirebaseAuthContainer.useContainer();
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      //userがログインしたらモーダルを開いている必要がないので閉じる
+      if (user) setOpen(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const settings = useSpring({
     config: config.default,
@@ -19,7 +31,7 @@ const LoginModal: React.FCX = ({ className }) => {
   });
   return (
     <div className={className}>
-      {user ? user.name : 'no name'}
+      {user ? user.name : ''}
       <animated.div style={settings} onClick={toggle} />
       <animated.div style={settings}>
         <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
@@ -45,6 +57,7 @@ export const StyledLoginModal = styled(LoginModal)`
     display: flex;
     width: 60vw;
     height: 60vh;
+    color: #000;
     border-radius: 10px;
     background-color: #fff;
   }

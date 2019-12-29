@@ -46,7 +46,7 @@ export const GlobalCSS = () => (
             'Segoe UI Symbol', 'Noto Sans Emoji';
 
           @media screen and (max-width: 768px) {
-            font-size: 1.4rem;
+            font-size: 1.4em;
           }
 
           @media screen and (max-width: 480px) {

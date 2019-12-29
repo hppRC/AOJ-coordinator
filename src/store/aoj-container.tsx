@@ -33,8 +33,6 @@ const useAOJContainer = () => {
         const docRef = AOJDataCollRef(user.uid).doc('userData');
         const userData = (await docRef.get()).data();
         setAOJUser(userData?.data);
-      } else {
-        console.log('not login');
       }
     });
 

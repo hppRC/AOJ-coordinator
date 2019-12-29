@@ -7,8 +7,12 @@ import styled from '@emotion/styled';
 
 const GoogleAuthButton: React.FCX = ({ className }) => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  const onClick = () => {
-    firebase.auth().signInWithPopup(provider);
+  const onClick = async () => {
+    try {
+      await firebase.auth().signInWithPopup(provider);
+    } catch (error) {
+      console.log('please login before using AOJ coordinator');
+    }
   };
 
   return (

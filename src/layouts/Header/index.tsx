@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { StyledLoginModal } from './login-modal';
-import { StyledModeButton } from './mode-button';
+import { StyledModeButton } from './login-out-button';
 
 const Header: React.FCX = ({ className }) => {
   return (
@@ -28,7 +28,7 @@ export const StyledHeader = styled(Header)`
 
   padding: 2rem;
   color: #fff;
-  background-color: #222e50;
+  background-color: #000113;
 
   z-index: 1000;
 `;
