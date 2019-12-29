@@ -8,7 +8,7 @@ import { StyledModeButton } from './mode-button';
 const Header: React.FCX = ({ className }) => {
   return (
     <header className={className}>
-      <h1>AOJ Cordinator</h1>
+      <h1>AOJ Coordinator</h1>
       <nav>
         <StyledModeButton />
         <StyledLoginModal />
@@ -18,13 +18,17 @@ const Header: React.FCX = ({ className }) => {
 };
 
 export const StyledHeader = styled(Header)`
-  top: 0;
   position: fixed;
+  top: 0;
   left: 0;
 
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  padding: 2rem;
+  color: #fff;
+  background-color: #222e50;
 
   z-index: 1000;
 `;
