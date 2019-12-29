@@ -24,15 +24,22 @@ export const StyledHeader = styled(Header)`
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
-  height: 6vh;
 
   padding: 2rem;
   color: #fff;
   background-color: #000113;
 
   z-index: 1000;
+
+  @media screen and (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 export default StyledHeader;

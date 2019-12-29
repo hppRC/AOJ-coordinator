@@ -31,7 +31,7 @@ export type AOJUser = {
   readonly birthYear: number;
   readonly displayLanguage: string;
   readonly defaultProgrammingLanguage: string;
-  readonly avatar: null;
+  readonly avatar: any;
   readonly status: AOJUserStatus;
   readonly url: string;
 };
