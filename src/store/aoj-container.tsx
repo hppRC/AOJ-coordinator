@@ -5,13 +5,12 @@ import { FirebaseAuthContainer } from 'src/store';
 import { AOJUser, Problem } from 'types/models';
 import { createContainer } from 'unstated-next';
 
-const AOJUserDocRef = (uid: string) =>
+const AOJDataCollRef = (uid: string) =>
   firebase
     .firestore()
     .collection(`users`)
     .doc(uid)
-    .collection(`aoj_data`)
-    .doc('userData');
+    .collection(`AOJData`);
 
 const useAOJContainer = () => {
   //custom hook内でuseStateから取れた変数を使ってもリアクティブになっていないので注意
@@ -31,7 +30,7 @@ const useAOJContainer = () => {
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        const docRef = AOJUserDocRef(user.uid);
+        const docRef = AOJDataCollRef(user.uid).doc('userData');
         const userData = (await docRef.get()).data();
         setAOJUser(userData?.data);
       } else {
@@ -45,13 +44,20 @@ const useAOJContainer = () => {
     };
   }, []);
 
-  const setAOJUserOnFirestore = async (userData: AOJUser) => {
-    if (!userData || !user) return;
-    //if (aojUser?.id === userData.id) return;
+  const setAOJUserOnFirestore = async (aojUserId: string) => {
+    if (!user || aojUser?.id === aojUserId) return;
+    const url = `https://judgeapi.u-aizu.ac.jp/users/${aojUserId}`;
+    let res: AxiosResponse<AOJUser>;
+    try {
+      res = await client.get(url);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+    if (res.status !== 200) return;
 
-    const { uid } = user;
-
-    const docRef = AOJUserDocRef(uid);
+    const userData = res.data;
+    const docRef = AOJDataCollRef(user.uid).doc('userData');
     const doc = await docRef.get();
 
     if (doc.exists) {
@@ -61,10 +67,7 @@ const useAOJContainer = () => {
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         .catch(error => {
-          console.error(
-            'document exists but error occured on Update useData',
-            error
-          );
+          console.error('update: document exists', error);
         });
     } else {
       docRef
@@ -74,58 +77,38 @@ const useAOJContainer = () => {
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         .catch(error => {
-          console.error(
-            "document dosen't exists but error occured on Update useData",
-            error
-          );
+          console.error("update: document dosen't exists", error);
         });
     }
 
     setAOJUser(userData);
-    await initProblemsOnFirestore(userData.id);
-
+    initProblemsOnFirestore(userData.id);
     return;
   };
 
   const initProblemsOnFirestore = async (aojUserId: string) => {
     if (!user) return;
-    const { uid } = user;
-
-    const collection = firebase
-      .firestore()
-      .collection(`users`)
-      .doc(uid)
-      .collection(`solved_problems`);
+    const docRef = AOJDataCollRef(user.uid).doc(`solvedProblems`);
 
     try {
-      //この関数が呼ばれる時は初期化したいとき(AOJ user id の登録・変更)に限るので、もともとあるデータ(間違ってるデータ)は全部削除
-      (await collection.get()).docs.forEach(doc => {
-        collection.doc(doc.id).delete();
-      });
-      //解いた問題を詰め直す用
       const newSolvedProblemIds = new Set<string>();
-
       //AOJのAPIから指定ユーザの解答情報を全部取ってくる
-      const url = `https://judgeapi.u-aizu.ac.jp/solutions/users/${aojUserId}?size=5000`;
-      const res: AxiosResponse<Problem[]> = await client.get(url);
+      const urlOfUserSolutions = `https://judgeapi.u-aizu.ac.jp/solutions/users/${aojUserId}?size=5000`;
+      const res: AxiosResponse<Problem[]> = await client.get(
+        urlOfUserSolutions
+      );
 
-      for await (const problem of res.data) {
+      for (const problem of res.data) {
         const { problemId } = problem;
         newSolvedProblemIds.add(problemId);
-        await collection
-          .add({
-            problemId,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-          })
-          .catch(error => {
-            console.error('Error add todo to Firebase Database', error);
-          });
       }
+      //返り値がいらないのでawaitする必要なさそう
+      docRef.set({ solvedProblems: [...newSolvedProblemIds] });
       setProblemIds([newSolvedProblemIds]);
     } catch (error) {
       console.error(error);
     }
+    return;
   };
 
   return {

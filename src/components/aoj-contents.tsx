@@ -1,7 +1,5 @@
-import { AxiosResponse } from 'axios';
 import React, { useRef } from 'react';
 import { AOJContainer, FirebaseAuthContainer } from 'src/store';
-import { AOJUser } from 'types/models';
 
 import styled from '@emotion/styled';
 
@@ -10,7 +8,6 @@ const AOJContents: React.FCX = ({ className }) => {
   const {
     aojUser,
     setAOJUserOnFirestore,
-    client,
     solvedProblemIds
   } = AOJContainer.useContainer();
 
@@ -24,10 +21,7 @@ const AOJContents: React.FCX = ({ className }) => {
     if (aojUser?.id === userNameRef.current.value) return;
 
     try {
-      const url = `https://judgeapi.u-aizu.ac.jp/users/${userNameRef.current.value}`;
-      const res: AxiosResponse<AOJUser> = await client.get(url);
-      console.log(res.data);
-      setAOJUserOnFirestore(res.data);
+      setAOJUserOnFirestore(userNameRef.current.value);
     } catch (error) {
       console.error(error);
     }
