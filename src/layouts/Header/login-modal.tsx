@@ -53,13 +53,31 @@ export const StyledLoginModal = styled(LoginModal)`
   > div:nth-of-type(2) {
     position: fixed;
     top: 20vh;
-    left: 20vh;
+    left: 20vw;
     display: flex;
     width: 60vw;
     height: 60vh;
     color: #000;
     border-radius: 10px;
     background-color: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    > div:nth-of-type(2) {
+      top: 20vh;
+      left: 10vw;
+      width: 80vw;
+      height: 60vh;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    > div:nth-of-type(2) {
+      top: 20vh;
+      left: 2vw;
+      width: 96vw;
+      height: 60vh;
+    }
   }
 `;
 

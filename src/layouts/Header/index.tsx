@@ -3,14 +3,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { StyledLoginModal } from './login-modal';
-import { StyledModeButton } from './login-out-button';
+import { StyledLogInOutButton } from './login-out-button';
 
 const Header: React.FCX = ({ className }) => {
   return (
     <header className={className}>
       <h1>AOJ Coordinator</h1>
       <nav>
-        <StyledModeButton />
+        <StyledLogInOutButton />
         <StyledLoginModal />
       </nav>
     </header>
@@ -24,7 +24,9 @@ export const StyledHeader = styled(Header)`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 6vh;
 
   padding: 2rem;
   color: #fff;

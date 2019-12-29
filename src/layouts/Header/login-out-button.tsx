@@ -4,7 +4,7 @@ import { FirebaseAuthContainer, SwitchContainer } from 'src/store';
 
 import styled from '@emotion/styled';
 
-const ModeButton: React.FCX = ({ className }) => {
+const LogInOutButton: React.FCX = ({ className }) => {
   const { setOpen } = SwitchContainer.useContainer();
   const { user } = FirebaseAuthContainer.useContainer();
 
@@ -32,9 +32,9 @@ const ModeButton: React.FCX = ({ className }) => {
   );
 };
 
-export const StyledModeButton = styled(ModeButton)`
+export const StyledLogInOutButton = styled(LogInOutButton)`
   color: #ffffff;
   cursor: pointer;
 `;
 
-export default StyledModeButton;
+export default LogInOutButton;
