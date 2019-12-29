@@ -6,13 +6,13 @@ export const wrapPageElement = WrapPageElement;
 
 export const onClientEntry = () => {
   firebase.initializeApp({
-    apiKey: 'AIzaSyCFh7xKWn89QPeFFHvqgh5-NG5Ze5doawY',
-    authDomain: 'aoj-cordinator.firebaseapp.com',
-    databaseURL: 'https://aoj-cordinator.firebaseio.com',
-    projectId: 'aoj-cordinator',
-    storageBucket: 'aoj-cordinator.appspot.com',
-    messagingSenderId: '875646715312',
-    appId: '1:875646715312:web:4159d8c6f356e5711b4275',
-    measurementId: 'G-LZ27KQZD9K'
+    apiKey: 'AIzaSyB8wq7mhjaS6B4bvIGCAUTYCk0FfoWOfzA',
+    authDomain: 'aoj-coordinator.firebaseapp.com',
+    databaseURL: 'https://aoj-coordinator.firebaseio.com',
+    projectId: 'aoj-coordinator',
+    storageBucket: 'aoj-coordinator.appspot.com',
+    messagingSenderId: '14834621237',
+    appId: '1:14834621237:web:f86f011333453337ea8a7c',
+    measurementId: 'G-1EQ93X91FR'
   });
 };

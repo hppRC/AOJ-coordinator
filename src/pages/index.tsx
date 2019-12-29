@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    SEO, StyledAOJContents, StyledGoogleAuthButton as GoogleAuthButton,
-    StyledSignOutButton as SignOutButton
-} from 'src/components';
+import { SEO, StyledAOJContents } from 'src/components';
 import { FirebaseAuthContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 

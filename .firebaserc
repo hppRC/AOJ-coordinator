@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "aoj-cordinator"
+    "default": "aoj-coordinator"
   }
 }

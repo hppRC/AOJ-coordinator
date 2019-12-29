@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyledLoginModal } from 'src/components';
 
 import styled from '@emotion/styled';
 
+import { StyledLoginModal } from './login-modal';
 import { StyledModeButton } from './mode-button';
 
 const Header: React.FCX = ({ className }) => {
