@@ -4,11 +4,11 @@ import { SwitchContainer } from 'src/store';
 import styled from '@emotion/styled';
 
 const ModeButton: React.FCX = ({ className }) => {
-  const { open, toggle } = SwitchContainer.useContainer();
+  const { toggle } = SwitchContainer.useContainer();
 
   return (
     <button onClick={toggle} className={className}>
-      {open ? 'open' : 'close'}
+      log in
     </button>
   );
 };

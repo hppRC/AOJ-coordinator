@@ -6,3 +6,4 @@ export * from './wrap-page-element';
 export * from './form';
 export * from './auth-buttons';
 export * from './aoj-contents';
+export * from './login-modal';

@@ -17,10 +17,9 @@ const Index: React.FCX = ({ className }) => {
       {user ? (
         <>
           <StyledAOJContents />
-          <SignOutButton />
         </>
       ) : (
-        <GoogleAuthButton />
+        <></>
       )}
     </main>
   );

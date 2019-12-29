@@ -1,18 +1,17 @@
 import React from 'react';
-import { StyledGoogleAuthButton } from 'src/components';
+import { StyledLoginModal } from 'src/components';
 
 import styled from '@emotion/styled';
+
+import { StyledModeButton } from './mode-button';
 
 const Header: React.FCX = ({ className }) => {
   return (
     <header className={className}>
       <h1>AOJ Cordinator</h1>
       <nav>
-        <ul>
-          <li>
-            <StyledGoogleAuthButton />
-          </li>
-        </ul>
+        <StyledModeButton />
+        <StyledLoginModal />
       </nav>
     </header>
   );
@@ -26,12 +25,6 @@ export const StyledHeader = styled(Header)`
   display: flex;
   justify-content: space-between;
   width: 100%;
-
-  > nav {
-    > ul {
-      list-style: none;
-    }
-  }
 
   z-index: 1000;
 `;
