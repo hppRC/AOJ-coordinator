@@ -1,12 +1,10 @@
 import React, { ReactNode } from 'react';
 
-import { AOJContainer, FirebaseAuthContainer, SwitchContainer } from '../store';
+import { AOJContainer, FirebaseAuthContainer } from '../store';
 
 export const WrapRootElement = ({ element }: { element: ReactNode }) => (
   <FirebaseAuthContainer.Provider>
-    <AOJContainer.Provider>
-      <SwitchContainer.Provider>{element}</SwitchContainer.Provider>
-    </AOJContainer.Provider>
+    <AOJContainer.Provider>{element}</AOJContainer.Provider>
   </FirebaseAuthContainer.Provider>
 );
 

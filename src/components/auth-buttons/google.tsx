@@ -13,7 +13,7 @@ const GoogleAuthButton: React.FCX = ({ className }) => {
 
   return (
     <button className={className} onClick={onClick}>
-      Sign in with Google
+      log in
     </button>
   );
 };
