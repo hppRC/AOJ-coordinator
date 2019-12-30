@@ -1,12 +1,15 @@
 import React from 'react';
 import { SEO, StyledAOJContents } from 'src/components';
+import { SwitchContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
 import styled from '@emotion/styled';
 
 const Index: React.FCX = ({ className }) => {
+  //モーダルが開いている間はタッチイベントを無効にする
+  const { open } = SwitchContainer.useContainer();
   return (
-    <main className={className}>
+    <main className={className} style={{ touchAction: open ? 'none' : 'auto' }}>
       <section>
         <h1>AOJ Coordinator</h1>
         <h2>

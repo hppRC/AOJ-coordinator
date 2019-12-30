@@ -45,24 +45,51 @@ const LogInOutModal: React.FCX = ({ className }) => {
         {...bind()}
         style={{ ...commonSettings, ...modalSettings, x, y }}
       >
-        {user ? (
-          <>
-            <p>本当にログアウトしてもよろしいですか？</p>
-            <StyledSignOutButton />
-          </>
-        ) : (
-          <>
-            <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
-            <StyledGoogleAuthButton />
-          </>
-        )}
+        {user ? <StyledLogOutModal /> : <StyledLogInModal />}
       </animated.div>
     </div>
   );
 };
 
+const LogOutModal: React.FCX = ({ className }) => {
+  return (
+    <div className={className}>
+      <h3>本当にログアウトしてもよろしいですか？</h3>
+      <StyledSignOutButton />
+    </div>
+  );
+};
+
+const StyledLogOutModal = styled(LogOutModal)`
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  h3 {
+    padding: 4rem;
+  }
+`;
+
+const LogInModal: React.FCX = ({ className }) => {
+  return (
+    <div className={className}>
+      <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
+      <StyledGoogleAuthButton />
+    </div>
+  );
+};
+
+const StyledLogInModal = styled(LogInModal)`
+  padding: 2rem;
+`;
+
 export const StyledLogInOutModal = styled(LogInOutModal)`
   display: flex;
+  user-select: none;
+  touch-action: auto;
+
   > div:nth-of-type(1) {
     position: fixed;
     top: 0;
@@ -73,11 +100,11 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
   }
   > div:nth-of-type(2) {
     position: fixed;
-    top: 20vh;
-    left: 20vw;
+    top: 30vh;
+    left: 30vw;
     display: flex;
-    width: 60vw;
-    height: 60vh;
+    width: 40vw;
+    height: 40vh;
     color: #000113;
     border-radius: 10px;
     background-color: #fff;
@@ -87,19 +114,19 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
 
   @media screen and (max-width: 768px) {
     > div:nth-of-type(2) {
-      top: 20vh;
-      left: 10vw;
-      width: 80vw;
-      height: 60vh;
+      top: 30vh;
+      left: 20vw;
+      width: 60vw;
+      height: 40vh;
     }
   }
 
   @media screen and (max-width: 480px) {
     > div:nth-of-type(2) {
-      top: 20vh;
+      top: 40vh;
       left: 2vw;
       width: 96vw;
-      height: 60vh;
+      height: 30vh;
     }
   }
 `;

@@ -24,18 +24,18 @@ const LoginContents: React.FCX = ({ className }) => {
   const onSubmit = async (e: React.SyntheticEvent<{}>) => {
     e.preventDefault();
     if (!user || !userNameRef.current?.value.trim()) return;
-
-    //名前が保存されてるものと違う場合のみsetする,同じなら早期return
+    //名前が保存されてるものと違う場合のみsetする,同じなら書き込み直す必要が無いので早期return
     if (aojUser?.id === userNameRef.current.value) return;
 
+    userNameRef.current.value = '';
+
     try {
-      setAOJUserOnFirestore(userNameRef.current.value);
+      await setAOJUserOnFirestore(userNameRef.current.value);
     } catch (error) {
       console.error(error);
     }
-
-    userNameRef.current.value = '';
   };
+
   return (
     <div className={className}>
       <h2>{aojUser?.id}</h2>
@@ -51,7 +51,10 @@ const LoginContents: React.FCX = ({ className }) => {
 const LogoutContents: React.FCX = ({ className }) => {
   return (
     <div className={className}>
-      <div></div>
+      <div>
+        <div>Problems presenter</div>
+        <div>Virtual Contest Generator</div>
+      </div>
       <StyledGoogleAuthButton />
     </div>
   );

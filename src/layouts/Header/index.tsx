@@ -38,7 +38,10 @@ export const StyledHeader = styled(Header)`
   }
 
   @media screen and (max-width: 480px) {
-    padding: 2rem 1rem;
+    h1 {
+      font-size: 2rem;
+    }
+    padding: 1rem 0.75rem;
   }
 `;
 
