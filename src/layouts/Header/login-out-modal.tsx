@@ -106,7 +106,7 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
     left: 30vw;
     display: flex;
     width: 40vw;
-    height: 40vh;
+    height: 40vw;
     color: #000113;
     border-radius: 10px;
     background-color: #fff;

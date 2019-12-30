@@ -12,9 +12,6 @@ const Index: React.FCX = ({ className }) => {
     <main className={className} style={{ touchAction: open ? 'none' : 'auto' }}>
       <section>
         <h1>AOJ Coordinator</h1>
-        <h2>
-          AOJ CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
-        </h2>
       </section>
       <StyledAOJContents />
     </main>

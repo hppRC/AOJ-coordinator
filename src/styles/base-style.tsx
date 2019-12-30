@@ -7,7 +7,7 @@ export const baseStyle = css`
   max-width: 1400px;
 
   margin: 0 auto;
-  padding: 5rem 5vw 5rem 5vw;
+  padding: 5rem 2vw 5rem 2vw;
 
   h1 {
     font-size: 4rem;
@@ -17,6 +17,9 @@ export const baseStyle = css`
   @media screen and (max-width: 768px) {
   }
   @media screen and (max-width: 480px) {
+  }
+  @media screen and (max-height: 430px) {
+    padding-top: 10rem;
   }
 `;
 

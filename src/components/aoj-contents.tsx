@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { animated, config, useSprings } from 'react-spring';
 import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 
 import styled from '@emotion/styled';
@@ -10,7 +11,17 @@ const AOJContents: React.FCX = ({ className }) => {
 
   return (
     <section className={className}>
-      {user ? <StyledLoginContents /> : <StyledLogoutContents />}
+      {user ? (
+        <StyledLoginContents />
+      ) : (
+        <>
+          <h2>
+            AOJ
+            CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
+          </h2>
+          <StyledLogoutContents />
+        </>
+      )}
     </section>
   );
 };
@@ -36,9 +47,31 @@ const LoginContents: React.FCX = ({ className }) => {
     }
   };
 
+  const contents = [
+    <>
+      <h2>Problem Presenter</h2>
+    </>,
+    <>
+      <h2>Virtual Contest Coordinator</h2>
+    </>,
+    <>
+      <h2>comming soon!</h2>
+    </>,
+    <>
+      <h2>comming soon!</h2>
+    </>
+  ];
+
+  const [springs, set] = useSprings(contents.length, idx => ({
+    // idxによって異なる設定をしてもよい。
+    config: config.wobbly,
+    transform: 'scale(1)',
+    zIndex: 0
+  }));
+
   return (
     <section className={className}>
-      <h2>{aojUser?.id}</h2>
+      <h2>{aojUser?.id ?? 'Who are you?'}</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor='userName'>user name</label>
         <input
@@ -50,18 +83,22 @@ const LoginContents: React.FCX = ({ className }) => {
         <button type='submit'>get aoj user data</button>
       </form>
       <div>
-        <section>
-          <h2>Problem Presenter</h2>
-        </section>
-        <section>
-          <h2>Virtual Contest Coordinator</h2>
-        </section>
-        <section>
-          <h2>comming soon!</h2>
-        </section>
-        <section>
-          <h2>comming soon!</h2>
-        </section>
+        {springs.map((item, idx) => (
+          <animated.section
+            key={idx}
+            onMouseEnter={e =>
+              set(i =>
+                i === idx ? { transform: 'scale(1.2)' } : { zIndex: 0 }
+              )
+            }
+            onMouseLeave={e =>
+              set(i => (i === idx ? { transform: 'scale(1)' } : {}))
+            }
+            style={{ ...item, willChange: 'transform' }}
+          >
+            {contents[idx]}
+          </animated.section>
+        ))}
       </div>
     </section>
   );
@@ -81,12 +118,15 @@ const StyledLoginContents = styled(LoginContents)`
   padding: 5rem 0;
 
   div {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, 30vh);
+    grid-row-gap: 6vh;
+    justify-content: space-around;
     padding: 5rem 0;
 
     > section {
+      z-index: 0;
       display: block;
       padding: 2rem;
       border-radius: 5px;
@@ -99,12 +139,6 @@ const StyledLoginContents = styled(LoginContents)`
       h2 {
         word-break: keep-all;
       }
-
-      transition: transform 0.3s;
-
-      :hover {
-        transform: scale(1.2);
-      }
     }
 
     > section:nth-of-type(1) {
@@ -116,13 +150,22 @@ const StyledLoginContents = styled(LoginContents)`
     > section:nth-of-type(4) {
     }
   }
+  @media screen and (max-width: 1100px) {
+  }
 
   @media screen and (max-width: 768px) {
-    div {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
   @media screen and (max-width: 480px) {
+    div {
+      grid-template-columns: repeat(1, 1fr);
+
+      > section {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-height: 430px) {
     div {
       grid-template-columns: repeat(1, 1fr);
 
