@@ -9,6 +9,7 @@ const config = {
   basePath: `/`
 };
 
+//pallet; https://coolors.co/fcb3b3-151e3f-030027-f2f3d9-c16e70
 module.exports = {
   siteMetadata: {
     ...config

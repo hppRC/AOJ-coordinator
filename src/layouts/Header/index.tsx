@@ -29,7 +29,7 @@ export const StyledHeader = styled(Header)`
 
   padding: 2rem;
   color: #fff;
-  background-color: #000113;
+  background-color: #030027;
 
   z-index: 1000;
 

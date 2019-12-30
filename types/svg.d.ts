@@ -1,4 +1,4 @@
 declare module '*.svg' {
-  const SVGComponent: (props: any) => JSX.Element;
-  export default SVGComponent;
+  const SVG: string;
+  export default SVG;
 }
