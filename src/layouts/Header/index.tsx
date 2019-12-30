@@ -34,7 +34,7 @@ export const StyledHeader = styled(Header)`
   z-index: 1000;
 
   @media screen and (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 
   @media screen and (max-width: 480px) {

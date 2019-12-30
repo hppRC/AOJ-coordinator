@@ -90,6 +90,7 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
   user-select: none;
   touch-action: auto;
   word-break: keep-all;
+  z-index: 1001;
 
   > div:nth-of-type(1) {
     position: fixed;

@@ -36,7 +36,8 @@ export const StyledLogInOutButton = styled(LogInOutButton)`
   button {
     display: inline-block;
     color: #ffffff;
-    padding: 0.2rem 0;
+    padding: 0.7rem 0 0.2rem 0;
+
     cursor: pointer;
 
     transition: opacity 0.3s;
@@ -46,6 +47,15 @@ export const StyledLogInOutButton = styled(LogInOutButton)`
     }
   }
   @media screen and (max-width: 768px) {
+    h2 {
+      padding-top: 0.1rem;
+      font-size: 1.4rem;
+      padding-left: 0.5rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.5rem 0 0.2rem 0;
+    }
   }
   @media screen and (max-width: 480px) {
   }
