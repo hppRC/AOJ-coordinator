@@ -12,8 +12,10 @@ export const StyledFooter = styled(Footer)`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
   width: 100vw;
   height: 10vh;
+  background-color: #151e3f;
 `;
 
 export default StyledFooter;

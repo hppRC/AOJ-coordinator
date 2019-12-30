@@ -1,7 +1,5 @@
 import React from 'react';
-import { SEO, StyledAOJContents, StyledGoogleAuthButton } from 'src/components';
-import BackgroundSVG from 'src/images/background.svg';
-import EyecatchSVG from 'src/images/undraw_our_solution_htvp.svg';
+import { SEO, StyledAOJContents, StyledBackground, StyledGoogleAuthButton } from 'src/components';
 import { FirebaseAuthContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
@@ -11,49 +9,40 @@ const Index: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
 
   return (
-    <main className={className}>
-      <section>
-        <h1>AOJ Coordinator</h1>
-        <h2>
-          AOJ CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
-        </h2>
-        <img src={EyecatchSVG} />
-      </section>
-      {user ? (
-        <>
-          <StyledAOJContents />
-        </>
-      ) : (
-        <div>
-          <h2>利用するにはログインしてください</h2>
-          <StyledGoogleAuthButton />
-        </div>
-      )}
-      <div>
-        <img src={BackgroundSVG} />
-      </div>
-    </main>
+    <>
+      <main className={className}>
+        <section>
+          <h1>AOJ Coordinator</h1>
+          <h2>
+            AOJ
+            CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
+          </h2>
+        </section>
+        {user ? (
+          <>
+            <StyledAOJContents />
+          </>
+        ) : (
+          <div>
+            <h2>利用するにはログインしてください</h2>
+            <StyledGoogleAuthButton />
+          </div>
+        )}
+      </main>
+      <StyledBackground />
+    </>
   );
 };
 
 const StyledIndex = styled(Index)`
   ${baseStyle};
   margin-top: 10vh;
+  min-height: 80vh;
 
   > section {
-    display: flex;
-
     img {
       width: 10vw;
     }
-  }
-
-  > div:nth-child(3) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    z-index: -1;
   }
 `;
 
