@@ -1,5 +1,5 @@
 import React from 'react';
-import { SEO, StyledAOJContents, StyledBackground, StyledGoogleAuthButton } from 'src/components';
+import { SEO, StyledAOJContents, StyledGoogleAuthButton } from 'src/components';
 import { FirebaseAuthContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
@@ -9,28 +9,24 @@ const Index: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
 
   return (
-    <>
-      <main className={className}>
-        <section>
-          <h1>AOJ Coordinator</h1>
-          <h2>
-            AOJ
-            CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
-          </h2>
-        </section>
-        {user ? (
-          <>
-            <StyledAOJContents />
-          </>
-        ) : (
-          <div>
-            <h2>利用するにはログインしてください</h2>
-            <StyledGoogleAuthButton />
-          </div>
-        )}
-      </main>
-      <StyledBackground />
-    </>
+    <main className={className}>
+      <section>
+        <h1>AOJ Coordinator</h1>
+        <h2>
+          AOJ CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
+        </h2>
+      </section>
+      {user ? (
+        <>
+          <StyledAOJContents />
+        </>
+      ) : (
+        <div>
+          <h2>利用するにはログインしてください</h2>
+          <StyledGoogleAuthButton />
+        </div>
+      )}
+    </main>
   );
 };
 

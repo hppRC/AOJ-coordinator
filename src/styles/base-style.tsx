@@ -5,7 +5,7 @@ export const baseStyle = css`
   max-width: 1400px;
   height: auto;
   /* becaouse of footer height is 10vh */
-  min-height: 90vh;
+  min-height: 85vh;
 
   margin: 0 auto;
   padding: 5rem 5% 0 5%;

@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundSVG from 'src/images/background.svg';
 
 import styled from '@emotion/styled';
 
@@ -12,10 +13,11 @@ export const StyledFooter = styled(Footer)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #151e3f;
   width: 100vw;
-  height: 10vh;
-  background-color: #151e3f;
+  height: 15vh;
+  /* background-color: #151e3f; */
+  background: center / 103% no-repeat url(${BackgroundSVG});
 `;
 
 export default StyledFooter;
