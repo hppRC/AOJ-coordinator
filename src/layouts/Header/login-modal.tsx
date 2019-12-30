@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import React, { useEffect } from 'react';
 import { animated, config, useSpring } from 'react-spring';
+import { useDrag } from 'react-use-gesture';
 import { StyledGoogleAuthButton } from 'src/components/auth-buttons';
 import { SwitchContainer } from 'src/store';
 
@@ -20,23 +21,29 @@ const LoginModal: React.FCX = ({ className }) => {
     };
   }, []);
 
+  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    set({ x: down ? mx : 0, y: down ? my : 0 });
+  });
+
   const commonSettings = useSpring({
     config: config.gentle,
-    from: { opacity: 0, display: 'none' },
     opacity: open ? 1 : 0,
     display: open ? 'block' : 'none'
   });
 
   const modalSettings = useSpring({
     config: config.gentle,
-    from: { transform: 'translate3d(0, 3vh, 0)' },
-    transform: open ? 'translate3d(0, 0, 0)' : 'translate3d(0, 3vh, 0)'
+    transform: open ? 'translate3d(0, 0, 0)' : 'translate3d(0, 15px, 0)'
   });
 
   return (
     <div className={className}>
       <animated.div style={commonSettings} onClick={toggle} />
-      <animated.div style={{ ...commonSettings, ...modalSettings }}>
+      <animated.div
+        {...bind()}
+        style={{ ...commonSettings, ...modalSettings, x, y }}
+      >
         <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
         <StyledGoogleAuthButton />
       </animated.div>
@@ -53,6 +60,7 @@ export const StyledLoginModal = styled(LoginModal)`
     width: 100%;
     height: 100%;
     background-color: #00011390;
+    filter: blur(5px);
   }
   > div:nth-of-type(2) {
     position: fixed;
@@ -64,6 +72,8 @@ export const StyledLoginModal = styled(LoginModal)`
     color: #000113;
     border-radius: 10px;
     background-color: #fff;
+
+    will-change: transform;
   }
 
   @media screen and (max-width: 768px) {

@@ -38,7 +38,8 @@ export const GlobalCSS = () => (
         body {
           font-size: 1.6em;
           overflow-x: hidden;
-          overscroll-behavior-y: none;
+          /*overscroll-behavior-y: none;*/
+          color: #000113;
 
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             'Hiragino Sans', 'Noto Sans CJK JP', 'Original Yu Gothic',
