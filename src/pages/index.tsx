@@ -32,14 +32,7 @@ const Index: React.FCX = ({ className }) => {
 
 const StyledIndex = styled(Index)`
   ${baseStyle};
-  margin-top: 10vh;
-  min-height: 80vh;
-
-  > section {
-    img {
-      width: 10vw;
-    }
-  }
+  padding-top: 10vh;
 `;
 
 export default () => (

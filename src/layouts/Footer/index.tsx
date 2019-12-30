@@ -5,19 +5,48 @@ import styled from '@emotion/styled';
 
 const Footer: React.FCX = ({ className }) => (
   <footer className={className}>
-    Copyright © 2019 hppRC All Rights Reserved.
+    <p>
+      Copyright © 2019 <a href='https://twitter.com/osaremochi'>hppRC</a> All
+      Rights Reserved.
+    </p>
   </footer>
 );
 
 export const StyledFooter = styled(Footer)`
   display: flex;
   justify-content: center;
-  align-items: center;
-  color: #151e3f;
+  align-items: flex-end;
+
   width: 100vw;
-  height: 15vh;
-  /* background-color: #151e3f; */
-  background: center / 103% no-repeat url(${BackgroundSVG});
+  height: 20vw;
+
+  background: center / 105% no-repeat url(${BackgroundSVG});
+  background-color: #fff;
+
+  p {
+    color: #fff;
+    padding: 2rem;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1.2rem;
+      padding: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    background: center / 110% no-repeat url(${BackgroundSVG});
+    p {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+  }
 `;
 
 export default StyledFooter;

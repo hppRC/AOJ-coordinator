@@ -54,6 +54,12 @@ export const GlobalCSS = () => (
           }
         }
       }
+
+      #gatsby-focus-wrapper {
+        display: flex;
+        flex-flow: column;
+        min-height: 100vh;
+      }
     `}
   />
 );
