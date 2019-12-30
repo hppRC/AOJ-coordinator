@@ -27,6 +27,8 @@ const LogInOutButton: React.FCX = ({ className }) => {
 };
 
 export const StyledLogInOutButton = styled(LogInOutButton)`
+  display: flex;
+  justify-content: space-between;
   h2 {
     display: inline-block;
     padding-left: 1rem;
@@ -42,6 +44,10 @@ export const StyledLogInOutButton = styled(LogInOutButton)`
     :hover {
       opacity: 0.6;
     }
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 480px) {
   }
 `;
 

@@ -9,9 +9,9 @@ const Header: React.FCX = ({ className }) => {
   return (
     <header className={className}>
       <h1>AOJ Coordinator</h1>
+      <StyledLogInOutModal />
       <nav>
         <StyledLogInOutButton />
-        <StyledLogInOutModal />
       </nav>
     </header>
   );
