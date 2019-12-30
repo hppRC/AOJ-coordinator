@@ -1,5 +1,5 @@
 import React from 'react';
-import { SEO, StyledAOJContents } from 'src/components';
+import { SEO, StyledAOJContents, StyledGoogleAuthButton } from 'src/components';
 import { FirebaseAuthContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
@@ -10,13 +10,19 @@ const Index: React.FCX = ({ className }) => {
 
   return (
     <main className={className}>
-      <h1>this is index page!</h1>
+      <h1>AOJ Coordinator</h1>
+      <h2>
+        AOJ CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
+      </h2>
       {user ? (
         <>
           <StyledAOJContents />
         </>
       ) : (
-        <></>
+        <section>
+          <h2>利用するにはログインしてください</h2>
+          <StyledGoogleAuthButton />
+        </section>
       )}
     </main>
   );

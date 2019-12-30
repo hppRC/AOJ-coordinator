@@ -60,7 +60,6 @@ export const StyledLoginModal = styled(LoginModal)`
     width: 100%;
     height: 100%;
     background-color: #00011390;
-    filter: blur(5px);
   }
   > div:nth-of-type(2) {
     position: fixed;

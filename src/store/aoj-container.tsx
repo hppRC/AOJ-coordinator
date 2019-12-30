@@ -45,6 +45,7 @@ const useAOJContainer = () => {
 
   const setAOJUserOnFirestore = async (aojUserId: string) => {
     if (!user || aojUser?.id === aojUserId) return;
+
     const url = `https://judgeapi.u-aizu.ac.jp/users/${aojUserId}`;
     let res: AxiosResponse<AOJUser>;
     try {
