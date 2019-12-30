@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import React from 'react';
 import { AOJContainer, FirebaseAuthContainer, SwitchContainer } from 'src/store';
 
@@ -9,21 +8,18 @@ const LogInOutButton: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
   const { aojUser } = AOJContainer.useContainer();
 
-  const handleLogin = () => {
+  const onClick = () => {
+    //ログイン、ログアウト確認用モーダルを開く
     setOpen(true);
-  };
-
-  const handleLogout = () => {
-    firebase.auth().signOut();
   };
 
   // userがログインしているならLogoutボタンを、ログアウト状態ならログインボタンを出す
   return (
     <div className={className}>
       {user ? (
-        <button onClick={handleLogout}>log out</button>
+        <button onClick={onClick}>log out</button>
       ) : (
-        <button onClick={handleLogin}>log in</button>
+        <button onClick={onClick}>log in</button>
       )}
       <h2>{aojUser?.id}</h2>
     </div>

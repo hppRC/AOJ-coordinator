@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { StyledLoginModal } from './login-modal';
 import { StyledLogInOutButton } from './login-out-button';
+import { StyledLogInOutModal } from './login-out-modal';
 
 const Header: React.FCX = ({ className }) => {
   return (
@@ -11,7 +11,7 @@ const Header: React.FCX = ({ className }) => {
       <h1>AOJ Coordinator</h1>
       <nav>
         <StyledLogInOutButton />
-        <StyledLoginModal />
+        <StyledLogInOutModal />
       </nav>
     </header>
   );

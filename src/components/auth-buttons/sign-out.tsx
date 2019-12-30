@@ -12,7 +12,7 @@ const SignOutButton: React.FCX = ({ className }) => {
 
   return (
     <button className={className} onClick={onClick}>
-      Sign out from gatsby-firebase-skeleton
+      Log out
     </button>
   );
 };

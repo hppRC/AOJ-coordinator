@@ -2,13 +2,14 @@ import firebase from 'firebase/app';
 import React, { useEffect } from 'react';
 import { animated, config, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { StyledGoogleAuthButton } from 'src/components/auth-buttons';
-import { SwitchContainer } from 'src/store';
+import { StyledGoogleAuthButton, StyledSignOutButton } from 'src/components/auth-buttons';
+import { FirebaseAuthContainer, SwitchContainer } from 'src/store';
 
 import styled from '@emotion/styled';
 
-const LoginModal: React.FCX = ({ className }) => {
+const LogInOutModal: React.FCX = ({ className }) => {
   const { open, toggle, setOpen } = SwitchContainer.useContainer();
+  const { user } = FirebaseAuthContainer.useContainer();
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -44,14 +45,23 @@ const LoginModal: React.FCX = ({ className }) => {
         {...bind()}
         style={{ ...commonSettings, ...modalSettings, x, y }}
       >
-        <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
-        <StyledGoogleAuthButton />
+        {user ? (
+          <>
+            <p>本当にログアウトしてもよろしいですか？</p>
+            <StyledSignOutButton />
+          </>
+        ) : (
+          <>
+            <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
+            <StyledGoogleAuthButton />
+          </>
+        )}
       </animated.div>
     </div>
   );
 };
 
-export const StyledLoginModal = styled(LoginModal)`
+export const StyledLogInOutModal = styled(LogInOutModal)`
   display: flex;
   > div:nth-of-type(1) {
     position: fixed;
@@ -94,4 +104,4 @@ export const StyledLoginModal = styled(LoginModal)`
   }
 `;
 
-export default StyledLoginModal;
+export default StyledLogInOutModal;

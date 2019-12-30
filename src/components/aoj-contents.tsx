@@ -3,13 +3,21 @@ import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 
 import styled from '@emotion/styled';
 
+import { StyledGoogleAuthButton } from './auth-buttons';
+
 const AOJContents: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
-  const {
-    aojUser,
-    setAOJUserOnFirestore,
-    solvedProblemIds
-  } = AOJContainer.useContainer();
+
+  return (
+    <section className={className}>
+      {user ? <StyledLoginContents /> : <StyledLogoutContents />}
+    </section>
+  );
+};
+
+const LoginContents: React.FCX = ({ className }) => {
+  const { user } = FirebaseAuthContainer.useContainer();
+  const { aojUser, setAOJUserOnFirestore } = AOJContainer.useContainer();
 
   const userNameRef = useRef<HTMLInputElement>(null);
 
@@ -28,36 +36,30 @@ const AOJContents: React.FCX = ({ className }) => {
 
     userNameRef.current.value = '';
   };
-
-  const handleProblems = async () => {
-    // const test = (
-    //   await firebase
-    //     .firestore()
-    //     .collection(`users`)
-    //     .doc(user?.uid)
-    //     .collection(`solved_problems`)
-    //     .get()
-    // ).docs.map(doc => doc.data());
-    // console.log(test);
-    //
-    console.log(solvedProblemIds);
-  };
-
   return (
     <div className={className}>
-      <h1>{aojUser?.id}</h1>
+      <h2>{aojUser?.id}</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor='userName'>user name</label>
         <input type='text' id='userName' ref={userNameRef} />
         <button type='submit'>get aoj user data</button>
       </form>
-      <button onClick={handleProblems}>problems</button>
     </div>
   );
 };
 
-export const StyledAOJContents = styled(AOJContents)`
-  background-color: red;
-`;
+const LogoutContents: React.FCX = ({ className }) => {
+  return (
+    <div className={className}>
+      <div></div>
+      <StyledGoogleAuthButton />
+    </div>
+  );
+};
+
+const StyledLoginContents = styled(LoginContents)``;
+const StyledLogoutContents = styled(LogoutContents)``;
+
+export const StyledAOJContents = styled(AOJContents)``;
 
 export default StyledAOJContents;

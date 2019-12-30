@@ -1,13 +1,10 @@
 import React from 'react';
-import { SEO, StyledAOJContents, StyledGoogleAuthButton } from 'src/components';
-import { FirebaseAuthContainer } from 'src/store';
+import { SEO, StyledAOJContents } from 'src/components';
 import baseStyle from 'src/styles/base-style';
 
 import styled from '@emotion/styled';
 
 const Index: React.FCX = ({ className }) => {
-  const { user } = FirebaseAuthContainer.useContainer();
-
   return (
     <main className={className}>
       <section>
@@ -16,16 +13,7 @@ const Index: React.FCX = ({ className }) => {
           AOJ CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
         </h2>
       </section>
-      {user ? (
-        <>
-          <StyledAOJContents />
-        </>
-      ) : (
-        <div>
-          <h2>利用するにはログインしてください</h2>
-          <StyledGoogleAuthButton />
-        </div>
-      )}
+      <StyledAOJContents />
     </main>
   );
 };
