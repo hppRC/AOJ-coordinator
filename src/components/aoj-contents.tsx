@@ -37,30 +37,102 @@ const LoginContents: React.FCX = ({ className }) => {
   };
 
   return (
-    <div className={className}>
+    <section className={className}>
       <h2>{aojUser?.id}</h2>
       <form onSubmit={onSubmit}>
         <label htmlFor='userName'>user name</label>
-        <input type='text' id='userName' ref={userNameRef} />
+        <input
+          type='text'
+          id='userName'
+          ref={userNameRef}
+          placeholder='AOJ User Id'
+        />
         <button type='submit'>get aoj user data</button>
       </form>
-    </div>
+      <div>
+        <section>
+          <h2>Problem Presenter</h2>
+        </section>
+        <section>
+          <h2>Virtual Contest Coordinator</h2>
+        </section>
+        <section>
+          <h2>comming soon!</h2>
+        </section>
+        <section>
+          <h2>comming soon!</h2>
+        </section>
+      </div>
+    </section>
   );
 };
 
 const LogoutContents: React.FCX = ({ className }) => {
   return (
     <div className={className}>
-      <div>
-        <div>Problems presenter</div>
-        <div>Virtual Contest Generator</div>
-      </div>
       <StyledGoogleAuthButton />
     </div>
   );
 };
 
-const StyledLoginContents = styled(LoginContents)``;
+const StyledLoginContents = styled(LoginContents)`
+  display: flex;
+  flex-flow: column;
+  padding: 5rem 0;
+
+  div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    padding: 5rem 0;
+
+    > section {
+      display: block;
+      padding: 2rem;
+      border-radius: 5px;
+      box-shadow: 0 0 3px 3px #03002720;
+      width: 30vh;
+      height: 30vh;
+      background-color: #fff;
+      cursor: pointer;
+
+      h2 {
+        word-break: keep-all;
+      }
+
+      transition: transform 0.3s;
+
+      :hover {
+        transform: scale(1.2);
+      }
+    }
+
+    > section:nth-of-type(1) {
+    }
+    > section:nth-of-type(2) {
+    }
+    > section:nth-of-type(3) {
+    }
+    > section:nth-of-type(4) {
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    div {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    div {
+      grid-template-columns: repeat(1, 1fr);
+
+      > section {
+        width: 100%;
+      }
+    }
+  }
+`;
+
 const StyledLogoutContents = styled(LogoutContents)``;
 
 export const StyledAOJContents = styled(AOJContents)``;
