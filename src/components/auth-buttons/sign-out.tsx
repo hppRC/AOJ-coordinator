@@ -3,10 +3,12 @@ import 'firebase/auth';
 import firebase from 'firebase/app';
 import React, { useState } from 'react';
 import { animated, config, useSpring } from 'react-spring';
+import { SwitchContainer } from 'src/store';
 
 import styled from '@emotion/styled';
 
 const SignOutButton: React.FCX = ({ className }) => {
+  const { setOpen } = SwitchContainer.useContainer();
   const [enter, setEnter] = useState(false);
   const spring = useSpring({
     config: config.wobbly,
@@ -15,8 +17,13 @@ const SignOutButton: React.FCX = ({ className }) => {
     color: enter ? '#fff' : '#030027'
   });
 
-  const onClick = () => {
-    firebase.auth().signOut();
+  const onClick = async () => {
+    try {
+      await firebase.auth().signOut();
+    } catch (error) {
+      console.error(error);
+    }
+    setOpen(false);
   };
 
   return (

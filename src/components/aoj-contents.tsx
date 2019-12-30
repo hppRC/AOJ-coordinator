@@ -126,8 +126,8 @@ const StyledLoginContents = styled(LoginContents)`
     padding: 5rem 0;
 
     > section {
+      display: flex;
       z-index: 0;
-      display: block;
       padding: 2rem;
       border-radius: 5px;
       box-shadow: 0 0 3px 3px #03002720;
@@ -136,6 +136,8 @@ const StyledLoginContents = styled(LoginContents)`
       background-color: #fff;
       cursor: pointer;
 
+      justify-content: center;
+      align-items: center;
       h2 {
         word-break: keep-all;
       }

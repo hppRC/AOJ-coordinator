@@ -6,8 +6,7 @@ import styled from '@emotion/styled';
 const Footer: React.FCX = ({ className }) => (
   <footer className={className}>
     <p>
-      Copyright © 2019 <a href='https://twitter.com/osaremochi'>hppRC</a> All
-      Rights Reserved.
+      Copyright © 2019 <a href='https://twitter.com/osaremochi'>hppRC</a>.
     </p>
   </footer>
 );
