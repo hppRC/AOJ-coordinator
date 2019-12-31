@@ -126,6 +126,16 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
     will-change: transform;
   }
 
+  @media screen and (max-width: 1100px) {
+    > div:nth-of-type(2) {
+      touch-action: none;
+      top: 30vh;
+      left: 20vw;
+      width: 60vw;
+      height: 40vh;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     > div:nth-of-type(2) {
       touch-action: none;
@@ -138,10 +148,10 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
 
   @media screen and (max-width: 480px) {
     > div:nth-of-type(2) {
-      top: 40vh;
+      top: 30vh;
       left: 2vw;
       width: 96vw;
-      height: 30vh;
+      height: 40vh;
     }
   }
 
