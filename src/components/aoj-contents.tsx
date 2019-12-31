@@ -112,6 +112,11 @@ const StyledLoginContents = styled(LoginContents)`
       border: 1px solid #030027;
       border-radius: 5px;
       margin-right: 2rem;
+      transition: border 0.3s;
+
+      :hover {
+        border: 1px solid #03002750;
+      }
     }
 
     button {
@@ -161,15 +166,6 @@ const StyledLoginContents = styled(LoginContents)`
         }
       }
     }
-
-    > section:nth-of-type(1) {
-    }
-    > section:nth-of-type(2) {
-    }
-    > section:nth-of-type(3) {
-    }
-    > section:nth-of-type(4) {
-    }
   }
   @media screen and (max-width: 1100px) {
   }
@@ -210,6 +206,9 @@ const LogoutContents: React.FCX = ({ className }) => {
 
   return (
     <div className={className}>
+      <h2>
+        AOJCoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
+      </h2>
       {texts.map((text: string, i: number) => (
         <React.Fragment key={i}>
           <Block text={text} key={i} />
@@ -221,7 +220,7 @@ const LogoutContents: React.FCX = ({ className }) => {
 
 const Block: React.FCX<{ text: string }> = ({ text }) => {
   const [{ x, y }, set] = useSpring(() => ({
-    config: config.wobbly,
+    config: config.gentle,
     x: 0,
     y: 0
   }));
@@ -245,8 +244,44 @@ const StyledLogoutContents = styled(LogoutContents)`
     user-select: none;
   }
 
-  h2:nth-of-type(3) {
+  h2:nth-of-type(1) {
+    display: none;
+  }
+
+  h2:nth-of-type(4) {
     padding-right: 1rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    h2 {
+      font-size: 2.6rem;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    h2 {
+      display: none;
+    }
+    h2:nth-of-type(1) {
+      display: inline;
+      font-size: 2.5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 480px) {
+    h2:nth-of-type(1) {
+      font-size: 1.8rem;
+    }
+  }
+  @media screen and (max-height: 430px) {
+    h2 {
+      display: none;
+    }
+    h2:nth-of-type(1) {
+      display: inline;
+      font-size: 1.8rem;
+    }
   }
 `;
 

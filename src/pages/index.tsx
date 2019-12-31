@@ -7,9 +7,7 @@ import styled from '@emotion/styled';
 const Index: React.FCX = ({ className }) => {
   return (
     <main className={className}>
-      <section>
-        <h1>AOJ Coordinator β ver.</h1>
-      </section>
+      <h1>AOJ Coordinator β ver.</h1>
       <StyledAOJContents />
     </main>
   );
@@ -22,7 +20,7 @@ const StyledIndex = styled(Index)`
   }
   @media screen and (max-width: 480px) {
     h1 {
-      font-size: 4rem;
+      font-size: 3rem;
       word-break: keep-all;
     }
   }
