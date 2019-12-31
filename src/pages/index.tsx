@@ -1,17 +1,14 @@
 import React from 'react';
 import { SEO, StyledAOJContents } from 'src/components';
-import { SwitchContainer } from 'src/store';
 import baseStyle from 'src/styles/base-style';
 
 import styled from '@emotion/styled';
 
 const Index: React.FCX = ({ className }) => {
-  //モーダルが開いている間はタッチイベントを無効にする
-  const { open } = SwitchContainer.useContainer();
   return (
-    <main className={className} style={{ touchAction: open ? 'none' : 'auto' }}>
+    <main className={className}>
       <section>
-        <h1>AOJ Coordinator</h1>
+        <h1>AOJ Coordinator β ver.</h1>
       </section>
       <StyledAOJContents />
     </main>
@@ -20,7 +17,6 @@ const Index: React.FCX = ({ className }) => {
 
 const StyledIndex = styled(Index)`
   ${baseStyle};
-  padding-top: 10vh;
 `;
 
 export default () => (

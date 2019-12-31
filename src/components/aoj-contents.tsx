@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import React, { useRef } from 'react';
 import { animated, config, useSprings } from 'react-spring';
 import { AOJContainer, FirebaseAuthContainer } from 'src/store';
@@ -38,35 +39,30 @@ const LoginContents: React.FCX = ({ className }) => {
     //名前が保存されてるものと違う場合のみsetする,同じなら書き込み直す必要が無いので早期return
     if (aojUser?.id === userNameRef.current.value) return;
 
-    userNameRef.current.value = '';
-
     try {
       await setAOJUserOnFirestore(userNameRef.current.value);
     } catch (error) {
       console.error(error);
     }
+    //現在の値を消すのは全てが終わってからにしよう！👲
+    userNameRef.current.value = '';
   };
 
   const contents = [
-    <>
+    <Link to='/presenter'>
       <h2>Problem Presenter</h2>
-    </>,
-    <>
-      <h2>Virtual Contest Coordinator</h2>
-    </>,
-    <>
+    </Link>,
+    <Link to=''>
       <h2>comming soon!</h2>
-    </>,
-    <>
+    </Link>,
+    <Link to=''>
       <h2>comming soon!</h2>
-    </>
+    </Link>
   ];
 
   const [springs, set] = useSprings(contents.length, idx => ({
-    // idxによって異なる設定をしてもよい。
     config: config.wobbly,
-    transform: 'scale(1)',
-    zIndex: 0
+    transform: 'scale(1)'
   }));
 
   return (
@@ -87,9 +83,7 @@ const LoginContents: React.FCX = ({ className }) => {
           <animated.section
             key={idx}
             onMouseEnter={e =>
-              set(i =>
-                i === idx ? { transform: 'scale(1.2)' } : { zIndex: 0 }
-              )
+              set(i => (i === idx ? { transform: 'scale(1.2)' } : {}))
             }
             onMouseLeave={e =>
               set(i => (i === idx ? { transform: 'scale(1)' } : {}))
@@ -126,7 +120,6 @@ const StyledLoginContents = styled(LoginContents)`
     padding: 5rem 0;
 
     > section {
-      display: flex;
       z-index: 0;
       padding: 2rem;
       border-radius: 5px;
@@ -134,12 +127,21 @@ const StyledLoginContents = styled(LoginContents)`
       width: 30vh;
       height: 30vh;
       background-color: #fff;
-      cursor: pointer;
+      pointer-events: none;
 
-      justify-content: center;
-      align-items: center;
-      h2 {
-        word-break: keep-all;
+      a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        color: #030027;
+        pointer-events: auto;
+        text-decoration: none;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+          word-break: keep-all;
+        }
       }
     }
 

@@ -7,7 +7,7 @@ export const baseStyle = css`
   max-width: 1400px;
 
   margin: 0 auto;
-  padding: 5rem 2vw 5rem 2vw;
+  padding: 10vh 2vw 5rem 2vw;
 
   h1 {
     font-size: 4rem;

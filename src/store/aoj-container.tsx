@@ -57,6 +57,9 @@ const useAOJContainer = () => {
     if (res.status !== 200) return;
 
     const userData = res.data;
+    setAOJUser(userData);
+    initProblemsOnFirestore(userData.id);
+
     const docRef = AOJDataCollRef(user.uid).doc('userData');
     const doc = await docRef.get();
 
@@ -81,8 +84,6 @@ const useAOJContainer = () => {
         });
     }
 
-    setAOJUser(userData);
-    initProblemsOnFirestore(userData.id);
     return;
   };
 
