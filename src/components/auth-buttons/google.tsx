@@ -15,10 +15,11 @@ const GoogleAuthButton: React.FCX = ({ className }) => {
       console.log('please login before using AOJ coordinator');
     }
   };
-
+  //このボタン画像のキャッシュが効いてない
   return (
     <button className={className} onClick={onClick}>
-      <img src={GoogleButtonLight} />
+      Login with Google
+      <img src={GoogleButtonLight} alt='google authentication button' />
     </button>
   );
 };

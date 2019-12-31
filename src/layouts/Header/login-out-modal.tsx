@@ -100,13 +100,14 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
     height: 100%;
     background-color: #00011390;
   }
+
   > div:nth-of-type(2) {
     position: fixed;
     top: 30vh;
     left: 30vw;
     display: flex;
     width: 40vw;
-    height: 40vw;
+    height: 40vh;
     color: #000113;
     border-radius: 10px;
     background-color: #fff;
@@ -116,6 +117,7 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
 
   @media screen and (max-width: 768px) {
     > div:nth-of-type(2) {
+      touch-action: none;
       top: 30vh;
       left: 20vw;
       width: 60vw;
@@ -129,6 +131,16 @@ export const StyledLogInOutModal = styled(LogInOutModal)`
       left: 2vw;
       width: 96vw;
       height: 30vh;
+    }
+  }
+
+  @media screen and (max-height: 430px) {
+    > div:nth-of-type(2) {
+      touch-action: none;
+      top: 20vh;
+      left: 20vw;
+      width: 60vw;
+      height: 60vh;
     }
   }
 `;
