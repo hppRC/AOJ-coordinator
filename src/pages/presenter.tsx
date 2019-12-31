@@ -1,58 +1,75 @@
 import { AxiosResponse } from 'axios';
 import firebase from 'firebase/app';
-import React from 'react';
+import { navigate } from 'gatsby';
+import React, { useEffect, useState } from 'react';
 import { SEO } from 'src/components';
-import { AOJContainer } from 'src/store';
+import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 import { baseStyle } from 'src/styles';
 
 import styled from '@emotion/styled';
 
 const Presenter: React.FCX = ({ className }) => {
-  const { client } = AOJContainer.useContainer();
+  const { user } = FirebaseAuthContainer.useContainer();
+  const { aojUser, solvedProblemIds } = AOJContainer.useContainer();
+  const [diff, setDiff] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!user) navigate('/');
+
+    return () => {};
+  }, []);
+
   const onClick = async () => {
-    const url = `https://judgeapi.u-aizu.ac.jp/problems?size=${10000}`;
-    let res: AxiosResponse<any>;
-    try {
-      res = await client.get(url);
-    } catch (error) {
-      console.error(error);
-      return;
-    }
+    //diffをまだ作ってないときに限る
+    // console.log(typeof diff); == object?????なんで？
+    if (diff.length === 0) {
+      const data: any = (
+        await firebase
+          .firestore()
+          .collection('AOJdata')
+          .doc('allProblemIds')
+          .get()
+      ).data();
 
-    const allProblems: object[] = [];
-    const allProblemIds: string[] = [];
-    for (const problem of res.data) {
-      const { id } = problem;
-      allProblems.push(problem);
-      allProblemIds.push(id);
-    }
+      const difference: Set<string> = new Set(
+        data.allProblemIds.filter((e: string) => !solvedProblemIds.has(e))
+      );
 
-    console.log(allProblems);
-    console.log(allProblemIds);
+      console.log(difference);
 
-    try {
-      await firebase
-        .firestore()
-        .collection(`AOJdata`)
-        .doc('allProblems')
-        .set({ allProblems });
-    } catch (error) {
-      console.error(error);
-    }
-    try {
-      await firebase
-        .firestore()
-        .collection(`AOJdata`)
-        .doc('allProblemIds')
-        .set({ allProblemIds });
-    } catch (error) {
-      console.error(error);
+      const diff: string[] = Array.from(difference);
+      setDiff(diff);
+
+      const tmp: string[] = [];
+      for (let i = 0; i < 6; i++) {
+        tmp.push(diff[Math.floor(Math.random() * diff.length)]);
+      }
+      console.log(tmp);
+      setSelected(tmp);
+    } else {
+      console.log('test');
+      const tmp: string[] = [];
+      for (let i = 0; i < 6; i++) {
+        tmp.push(diff[Math.floor(Math.random() * diff.length)]);
+      }
+      console.log(tmp);
+      setSelected(tmp);
     }
   };
 
   return (
     <main className={className}>
       <button onClick={onClick}>generate problem</button>
+      <ul>
+        {console.log(selected)}
+        {selected.map((id: string, i: number) => (
+          <li key={i}>
+            <h3>{id}</h3>
+            <p>{`http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}`}</p>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 };

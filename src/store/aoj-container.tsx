@@ -33,6 +33,11 @@ const useAOJContainer = () => {
         const docRef = AOJDataCollRef(user.uid).doc('userData');
         const userData = (await docRef.get()).data();
         setAOJUser(userData?.data);
+
+        const solvedRef = AOJDataCollRef(user.uid).doc('solvedProblemIds');
+        const data = (await solvedRef.get()).data();
+        const solvedProblemIds = new Set([...data?.solvedProblemIds]);
+        setProblemIds([solvedProblemIds]);
       } else {
         setAOJUser(null);
       }
@@ -89,7 +94,7 @@ const useAOJContainer = () => {
 
   const initProblemsOnFirestore = async (aojUserId: string) => {
     if (!user) return;
-    const docRef = AOJDataCollRef(user.uid).doc(`solvedProblems`);
+    const docRef = AOJDataCollRef(user.uid).doc(`solvedProblemIds`);
 
     try {
       const newSolvedProblemIds = new Set<string>();
@@ -104,7 +109,7 @@ const useAOJContainer = () => {
         newSolvedProblemIds.add(problemId);
       }
       //返り値がいらないのでawaitする必要なさそう
-      docRef.set({ solvedProblems: [...newSolvedProblemIds] });
+      docRef.set({ solvedProblemIds: [...newSolvedProblemIds] });
       setProblemIds([newSolvedProblemIds]);
     } catch (error) {
       console.error(error);

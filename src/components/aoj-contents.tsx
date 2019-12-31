@@ -37,7 +37,10 @@ const LoginContents: React.FCX = ({ className }) => {
     e.preventDefault();
     if (!user || !userNameRef.current?.value.trim()) return;
     //名前が保存されてるものと違う場合のみsetする,同じなら書き込み直す必要が無いので早期return
-    if (aojUser?.id === userNameRef.current.value) return;
+    if (aojUser?.id === userNameRef.current.value) {
+      userNameRef.current.value = '';
+      return;
+    }
 
     try {
       await setAOJUserOnFirestore(userNameRef.current.value);
@@ -68,27 +71,27 @@ const LoginContents: React.FCX = ({ className }) => {
   return (
     <section className={className}>
       <h2>{aojUser?.id ?? 'Who are you?'}</h2>
+      <span>{aojUser ? 'change user name?' : 'input user name'}</span>
       <form onSubmit={onSubmit}>
-        <label htmlFor='userName'>user name</label>
         <input
           type='text'
           id='userName'
           ref={userNameRef}
           placeholder='AOJ User Id'
         />
-        <button type='submit'>get aoj user data</button>
+        <button type='submit'>submit</button>
       </form>
       <div>
-        {springs.map((item, idx) => (
+        {springs.map((item: any, idx: any) => (
           <animated.section
             key={idx}
-            onMouseEnter={_ =>
-              set(i => (i === idx ? { transform: 'scale(1.2)' } : {}))
+            onMouseEnter={() =>
+              set((i: any) => (i === idx ? { transform: 'scale(1.2)' } : {}))
             }
-            onMouseLeave={_ =>
-              set(i => (i === idx ? { transform: 'scale(1)' } : {}))
+            onMouseLeave={() =>
+              set((i: any) => (i === idx ? { transform: 'scale(1)' } : {}))
             }
-            style={{ ...item, willChange: 'transform' }}
+            style={item}
           >
             {contents[idx]}
           </animated.section>
@@ -111,6 +114,39 @@ const StyledLoginContents = styled(LoginContents)`
   flex-flow: column;
   padding: 5rem 0;
 
+  h2 {
+    font-size: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  span {
+    padding: 1rem 0 1rem 2rem;
+  }
+
+  form {
+    padding: 0 3rem;
+
+    input {
+      padding: 0.3rem;
+      border: 1px solid #030027;
+      border-radius: 5px;
+      margin-right: 2rem;
+    }
+
+    button {
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      background-color: #030027;
+
+      transition: opacity 0.3s;
+
+      :hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
   div {
     width: 100%;
     display: grid;
@@ -127,7 +163,7 @@ const StyledLoginContents = styled(LoginContents)`
       height: 30vh;
       background-color: #fff;
       pointer-events: none;
-
+      will-change: transform;
       a {
         display: flex;
         width: 100%;

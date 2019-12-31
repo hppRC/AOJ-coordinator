@@ -1,6 +1,7 @@
 import 'firebase/auth';
 
 import firebase from 'firebase/app';
+import { navigate } from 'gatsby';
 import React, { useState } from 'react';
 import { animated, config, useSpring } from 'react-spring';
 import { SwitchContainer } from 'src/store';
@@ -24,6 +25,7 @@ const SignOutButton: React.FCX = ({ className }) => {
       console.error(error);
     }
     setOpen(false);
+    navigate('/', { replace: true });
   };
 
   return (
