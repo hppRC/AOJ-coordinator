@@ -55,10 +55,10 @@ const LoginContents: React.FCX = ({ className }) => {
     <Link to='/presenter'>
       <h2>Problem Presenter</h2>
     </Link>,
-    <Link to=''>
+    <Link to='/'>
       <h2>comming soon!</h2>
     </Link>,
-    <Link to=''>
+    <Link to='/'>
       <h2>comming soon!</h2>
     </Link>
   ];

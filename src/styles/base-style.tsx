@@ -17,6 +17,7 @@ export const baseStyle = css`
   @media screen and (max-width: 768px) {
   }
   @media screen and (max-width: 480px) {
+    padding-top: 8vh;
   }
   @media screen and (max-height: 430px) {
     padding-top: 10rem;

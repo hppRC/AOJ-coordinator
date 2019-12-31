@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import React from 'react';
 
 import styled from '@emotion/styled';
@@ -8,7 +9,9 @@ import { StyledLogInOutModal } from './login-out-modal';
 const Header: React.FCX = ({ className }) => {
   return (
     <header className={className}>
-      <h1>AOJ Coordinator β</h1>
+      <Link to='/'>
+        <h1>AOJ Coordinator β</h1>
+      </Link>
       <StyledLogInOutModal />
       <nav>
         <StyledLogInOutButton />
@@ -18,6 +21,7 @@ const Header: React.FCX = ({ className }) => {
 };
 
 export const StyledHeader = styled(Header)`
+  word-break: keep-all;
   position: fixed;
   top: 0;
   left: 0;
@@ -33,15 +37,21 @@ export const StyledHeader = styled(Header)`
 
   z-index: 1000;
 
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
   @media screen and (max-width: 768px) {
     padding: 1.5rem 1rem;
   }
 
   @media screen and (max-width: 480px) {
-    h1 {
-      font-size: 2rem;
+    a {
+      h1 {
+        font-size: 2rem;
+      }
     }
-    padding: 1rem 0.75rem;
   }
 `;
 
