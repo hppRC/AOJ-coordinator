@@ -3,19 +3,18 @@ import 'firebase/auth';
 import firebase from 'firebase/app';
 import React, { useState } from 'react';
 import { animated, config, useSpring } from 'react-spring';
-import GoogleButtonLight from 'src/images/google-button-dark.png';
-import { commonButtonStyle } from 'src/styles/common-button';
+import { commonButtonStyle } from 'src/styles';
 
 import styled from '@emotion/styled';
 
-const GoogleAuthButton: React.FCX = ({ className }) => {
+const GitHubAuthButton: React.FCX = ({ className }) => {
   const [enter, setEnter] = useState(false);
   const spring = useSpring({
     config: config.wobbly,
     width: enter ? '250px' : '200px'
   });
 
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new firebase.auth.GithubAuthProvider();
   const onClick = async () => {
     try {
       await firebase.auth().signInWithPopup(provider);
@@ -32,21 +31,17 @@ const GoogleAuthButton: React.FCX = ({ className }) => {
       onMouseLeave={_ => setEnter(false)}
       style={spring}
     >
-      <img src={GoogleButtonLight} alt='google authentication button' />
+      GitHub
     </animated.button>
   );
 };
 
-export const StyledGoogleAuthButton = styled(GoogleAuthButton)`
+export const StyledGitHubAuthButton = styled(GitHubAuthButton)`
   position: relative;
   width: 200px;
   height: auto;
 
-  img {
-    width: 100%;
-  }
-
   ${commonButtonStyle}
 `;
 
-export default StyledGoogleAuthButton;
+export default StyledGitHubAuthButton;

@@ -1,9 +1,9 @@
 const config = {
-  siteTitle: `AOJ cordinator`,
-  siteTitleAlt: `AOJ cordinator - simple AOJ arena conrdinator -`,
-  siteHeadline: `AOJ cordinator - simple AOJ arena conrdinator -`,
-  siteUrl: `https://aoj-cordinator.firebaseapp.com`,
-  siteDescription: `AOJ cordinator - simple AOJ arena conrdinator -\nYou can easily create virtual contest and manage your solved problems`,
+  siteTitle: `AOJ coordinator`,
+  siteTitleAlt: `AOJ coordinator - simple AOJ arena conrdinator -`,
+  siteHeadline: `AOJ coordinator - simple AOJ arena conrdinator -`,
+  siteUrl: `https://aoj-coordinator.web.app`,
+  siteDescription: `AOJ coordinator - simple AOJ arena coordinator -\nYou can easily create virtual contest and manage your solved problems`,
   siteLanguage: `ja`,
   author: `@osaremochi`, // twitter account id
   basePath: `/`

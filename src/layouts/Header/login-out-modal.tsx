@@ -2,7 +2,9 @@ import firebase from 'firebase/app';
 import React, { useEffect } from 'react';
 import { animated, config, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { StyledGoogleAuthButton, StyledSignOutButton } from 'src/components/auth-buttons';
+import {
+    StyledGitHubAuthButton, StyledGoogleAuthButton, StyledSignOutButton
+} from 'src/components/auth-buttons';
 import { FirebaseAuthContainer, SwitchContainer } from 'src/store';
 
 import styled from '@emotion/styled';
@@ -53,10 +55,10 @@ const LogInOutModal: React.FCX = ({ className }) => {
 
 const LogOutModal: React.FCX = ({ className }) => {
   return (
-    <div className={className}>
+    <section className={className}>
       <h3>本当にログアウトしてもよろしいですか？</h3>
       <StyledSignOutButton />
-    </div>
+    </section>
   );
 };
 
@@ -74,15 +76,24 @@ const StyledLogOutModal = styled(LogOutModal)`
 
 const LogInModal: React.FCX = ({ className }) => {
   return (
-    <div className={className}>
-      <div>AOJ coordinator{'\n'}を使うにはまずログインをしてください</div>
+    <section className={className}>
+      <h3>AOJ coordinator{'\n'}を使うにはまずログインをしてください</h3>
       <StyledGoogleAuthButton />
-    </div>
+      <StyledGitHubAuthButton />
+    </section>
   );
 };
 
 const StyledLogInModal = styled(LogInModal)`
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
   padding: 2rem;
+  h3 {
+    padding: 4rem;
+  }
 `;
 
 export const StyledLogInOutModal = styled(LogInOutModal)`
