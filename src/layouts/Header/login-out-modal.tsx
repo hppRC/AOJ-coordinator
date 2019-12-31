@@ -94,6 +94,9 @@ const StyledLogInModal = styled(LogInModal)`
   h3 {
     padding: 4rem;
   }
+  button {
+    margin: 1rem 0;
+  }
 `;
 
 export const StyledLogInOutModal = styled(LogInOutModal)`

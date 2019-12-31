@@ -43,11 +43,12 @@ export const StyledGitHubAuthButton = styled(GitHubAuthButton)`
   position: relative;
 
   display: flex;
-  height: auto;
+
   white-space: nowrap;
 
   padding: 0 0 0 2rem;
 
+  border: 1px solid #030027;
   border-radius: 5px;
 
   svg {

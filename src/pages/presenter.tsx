@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { navigate } from 'gatsby';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SEO } from 'src/components';
 import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 import { baseStyle } from 'src/styles';
@@ -14,18 +14,14 @@ const Presenter: React.FCX = ({ className }) => {
   const [selected, setSelected] = useState<string[]>([]);
   const problemsNum = 6;
 
-  const refArray: React.MutableRefObject<any>[] = [];
-  for (let i = 0; i < problemsNum; i++) {
-    refArray.push(useRef(null));
-  }
-
   useEffect(() => {
     if (!user) navigate('/');
 
     return () => {};
   }, []);
 
-  const onClick = async () => {
+  const onSubmit = async (e: React.SyntheticEvent<{}>) => {
+    e.preventDefault();
     //diffをまだ作ってないときに限る
     // console.log(typeof diff); == object?????なんで？
     if (diff.length === 0) {
@@ -73,16 +69,14 @@ const Presenter: React.FCX = ({ className }) => {
 
   return (
     <main className={className}>
-      <button onClick={onClick}>generate problem</button>
+      <form onSubmit={onSubmit}>
+        <button type='submit'>generate problem</button>
+      </form>
       <ul>
-        {console.log(selected)}
         {selected.map((id: string, i: number) => (
           <li key={i}>
             <h2>{id}</h2>
-            <p
-              id={`copyTarget${i}`}
-              ref={refArray[i]}
-            >{`http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}`}</p>
+            <p>{`http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}`}</p>
             <button onClick={() => copy(id)}>copy ID</button>
             <button
               onClick={() =>
@@ -103,17 +97,21 @@ const Presenter: React.FCX = ({ className }) => {
 const StyledPresenter = styled(Presenter)`
   ${baseStyle};
 
-  > button {
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    color: #fff;
-    background-color: #030027;
+  form {
+    padding-bottom: 5rem;
 
-    transition: opacity, transform 0.3s;
+    button {
+      border-radius: 5px;
+      padding: 2rem 1rem;
+      color: #fff;
+      background-color: #030027;
 
-    :hover {
-      opacity: 0.9;
-      transform: scale(1.2);
+      transition: opacity, transform 0.3s;
+
+      :hover {
+        opacity: 0.9;
+        transform: scale(1.2);
+      }
     }
   }
 
@@ -126,8 +124,10 @@ const StyledPresenter = styled(Presenter)`
       grid-template-columns: 1fr 4fr 1fr 1fr;
       grid-gap: 4vw;
       justify-content: center;
+      padding: 2rem 0;
 
       h2 {
+        word-break: keep-all;
       }
 
       p {
@@ -152,25 +152,42 @@ const StyledPresenter = styled(Presenter)`
   @media screen and (max-width: 768px) {
   }
   @media screen and (max-width: 480px) {
-    ul {
-      list-style: none;
+    form {
+      padding: 3rem 0 2rem 0;
+      > button {
+        height: 4rem;
+        :hover {
+          transform: scale(1.05);
+        }
+      }
+    }
 
+    ul {
       li {
         grid-template:
-          'a b b b' 5rem
-          '. . c d' 5rem / 0.8fr 1fr 1fr 1fr;
-        grid-gap: 1vw;
+          'a a c d' 5rem
+          'b b b b' 5rem / 0.8fr 1fr 1fr 1fr;
+        grid-gap: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        grid-column-gap: 1vw;
+        padding: 0.5rem 0;
 
         h2 {
           grid-area: a;
+          font-size: 2.6rem;
         }
         p {
           grid-area: b;
         }
         > button {
           padding: 0;
-
-          height: 2rem;
+          height: 2.5rem;
+          :hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+          }
         }
         button:nth-of-type(1) {
           grid-area: c;

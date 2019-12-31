@@ -1,28 +1,17 @@
 import { Link } from 'gatsby';
 import React, { useRef } from 'react';
-import { animated, config, useSprings } from 'react-spring';
+import { animated, config, useSpring, useSprings } from 'react-spring';
+import { useDrag } from 'react-use-gesture';
 import { AOJContainer, FirebaseAuthContainer } from 'src/store';
 
 import styled from '@emotion/styled';
-
-import { StyledGoogleAuthButton } from './auth-buttons';
 
 const AOJContents: React.FCX = ({ className }) => {
   const { user } = FirebaseAuthContainer.useContainer();
 
   return (
     <section className={className}>
-      {user ? (
-        <StyledLoginContents />
-      ) : (
-        <>
-          <h2>
-            AOJ
-            CoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです
-          </h2>
-          <StyledLogoutContents />
-        </>
-      )}
+      {user ? <StyledLoginContents /> : <StyledLogoutContents />}
     </section>
   );
 };
@@ -101,14 +90,6 @@ const LoginContents: React.FCX = ({ className }) => {
   );
 };
 
-const LogoutContents: React.FCX = ({ className }) => {
-  return (
-    <div className={className}>
-      <StyledGoogleAuthButton />
-    </div>
-  );
-};
-
 const StyledLoginContents = styled(LoginContents)`
   display: flex;
   flex-flow: column;
@@ -139,10 +120,11 @@ const StyledLoginContents = styled(LoginContents)`
       color: #fff;
       background-color: #030027;
 
-      transition: opacity 0.3s;
+      transition: opacity, transform 0.3s;
 
       :hover {
         opacity: 0.9;
+        transform: scale(1.2);
       }
     }
   }
@@ -195,6 +177,12 @@ const StyledLoginContents = styled(LoginContents)`
   @media screen and (max-width: 768px) {
   }
   @media screen and (max-width: 480px) {
+    padding: 0 0 5rem 0;
+
+    h2 {
+      padding: 0;
+    }
+
     div {
       grid-template-columns: repeat(1, 1fr);
 
@@ -215,7 +203,52 @@ const StyledLoginContents = styled(LoginContents)`
   }
 `;
 
-const StyledLogoutContents = styled(LogoutContents)``;
+const LogoutContents: React.FCX = ({ className }) => {
+  const texts = [
+    ...'AOJCoordinatorはAOJ関連の色々をいい感じになんやかんやするサービスです'
+  ];
+
+  return (
+    <div className={className}>
+      {texts.map((text: string, i: number) => (
+        <React.Fragment key={i}>
+          <Block text={text} key={i} />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+const Block: React.FCX<{ text: string }> = ({ text }) => {
+  const [{ x, y }, set] = useSpring(() => ({
+    config: config.wobbly,
+    x: 0,
+    y: 0
+  }));
+  const bind = useDrag(({ offset: [x, y] }) => {
+    set({ x, y });
+  });
+  return (
+    <animated.h2 {...bind()} style={{ x, y }}>
+      {text}
+    </animated.h2>
+  );
+};
+
+const StyledLogoutContents = styled(LogoutContents)`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  h2 {
+    font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  h2:nth-of-type(3) {
+    padding-right: 1rem;
+  }
+`;
 
 export const StyledAOJContents = styled(AOJContents)``;
 

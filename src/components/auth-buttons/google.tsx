@@ -12,7 +12,7 @@ const GoogleAuthButton: React.FCX = ({ className }) => {
   const [enter, setEnter] = useState(false);
   const spring = useSpring({
     config: config.wobbly,
-    width: enter ? '250px' : '200px'
+    width: enter ? '30rem' : '25rem'
   });
 
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -39,7 +39,7 @@ const GoogleAuthButton: React.FCX = ({ className }) => {
 
 export const StyledGoogleAuthButton = styled(GoogleAuthButton)`
   position: relative;
-  width: 200px;
+  width: 25rem;
   height: auto;
 
   img {

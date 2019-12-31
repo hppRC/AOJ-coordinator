@@ -17,6 +17,15 @@ const Index: React.FCX = ({ className }) => {
 
 const StyledIndex = styled(Index)`
   ${baseStyle};
+
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 4rem;
+      word-break: keep-all;
+    }
+  }
 `;
 
 export default () => (
