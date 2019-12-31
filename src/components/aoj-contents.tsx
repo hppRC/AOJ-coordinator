@@ -82,10 +82,10 @@ const LoginContents: React.FCX = ({ className }) => {
         {springs.map((item, idx) => (
           <animated.section
             key={idx}
-            onMouseEnter={e =>
+            onMouseEnter={_ =>
               set(i => (i === idx ? { transform: 'scale(1.2)' } : {}))
             }
-            onMouseLeave={e =>
+            onMouseLeave={_ =>
               set(i => (i === idx ? { transform: 'scale(1)' } : {}))
             }
             style={{ ...item, willChange: 'transform' }}
@@ -121,7 +121,6 @@ const StyledLoginContents = styled(LoginContents)`
 
     > section {
       z-index: 0;
-      padding: 2rem;
       border-radius: 5px;
       box-shadow: 0 0 3px 3px #03002720;
       width: 30vh;
