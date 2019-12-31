@@ -93,7 +93,7 @@ const useAOJContainer = () => {
 
     try {
       const newSolvedProblemIds = new Set<string>();
-      //AOJのAPIから指定ユーザの解答情報を全部取ってくる
+      //AOJのAPIから指定ユーザの解答情報を全部取ってくる, 流石に5000回提出しとる人はおらんやろ👴
       const urlOfUserSolutions = `https://judgeapi.u-aizu.ac.jp/solutions/users/${aojUserId}?size=5000`;
       const res: AxiosResponse<Problem[]> = await client.get(
         urlOfUserSolutions
