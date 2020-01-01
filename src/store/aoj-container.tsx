@@ -63,30 +63,34 @@ const useAOJContainer = () => {
 
     const userData = res.data;
     setAOJUser(userData);
-    initProblemsOnFirestore(userData.id);
+    await initProblemsOnFirestore(userData.id);
 
-    const docRef = AOJDataCollRef(user.uid).doc('userData');
-    const doc = await docRef.get();
+    try {
+      const docRef = AOJDataCollRef(user.uid).doc('userData');
+      const doc = await docRef.get();
 
-    if (doc.exists) {
-      docRef
-        .update({
-          data: userData,
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .catch(error => {
-          console.error('update: document exists', error);
-        });
-    } else {
-      docRef
-        .set({
-          data: userData,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .catch(error => {
-          console.error("update: document dosen't exists", error);
-        });
+      if (doc.exists) {
+        docRef
+          .update({
+            data: userData,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .catch(error => {
+            console.error('update: document exists', error);
+          });
+      } else {
+        docRef
+          .set({
+            data: userData,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .catch(error => {
+            console.error("update: document dosen't exists", error);
+          });
+      }
+    } catch (error) {
+      console.error(error);
     }
 
     return;
@@ -108,8 +112,8 @@ const useAOJContainer = () => {
         const { problemId } = problem;
         newSolvedProblemIds.add(problemId);
       }
-      //返り値がいらないのでawaitする必要なさそう
-      docRef.set({ solvedProblemIds: [...newSolvedProblemIds] });
+      //awaitがないとUncaught error になっちゃうからつけよう
+      await docRef.set({ solvedProblemIds: [...newSolvedProblemIds] });
       setProblemIds([newSolvedProblemIds]);
     } catch (error) {
       console.error(error);

@@ -30,7 +30,6 @@ const LoginContents: React.FCX = ({ className }) => {
       userNameRef.current.value = '';
       return;
     }
-
     try {
       await setAOJUserOnFirestore(userNameRef.current.value);
     } catch (error) {
