@@ -23,7 +23,7 @@ const Presenter: React.FCX = ({ className }) => {
   const onSubmit = async (e: React.SyntheticEvent<{}>) => {
     e.preventDefault();
     //diffをまだ作ってないときに限る
-    // console.log(typeof diff); == object?????なんで？
+    // typeof diff == objectになったんだけど?????なんで？
     if (diff.length === 0) {
       const data: any = (
         await firebase
@@ -76,12 +76,12 @@ const Presenter: React.FCX = ({ className }) => {
         {selected.map((id: string, i: number) => (
           <li key={i}>
             <h2>{id}</h2>
-            <p>{`http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}`}</p>
+            <p>{`http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}&lang=ja`}</p>
             <button onClick={() => copy(id)}>copy ID</button>
             <button
               onClick={() =>
                 copy(
-                  `http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}`
+                  `http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=${id}&lang=ja`
                 )
               }
             >
